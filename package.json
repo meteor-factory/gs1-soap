@@ -5,6 +5,8 @@
     "start": "meteor run"
   },
   "dependencies": {
-    "meteor-node-stubs": "~0.2.0"
+    "http": "0.0.0",
+    "meteor-node-stubs": "~0.2.0",
+    "soap": "^0.16.0"
   }
 }
