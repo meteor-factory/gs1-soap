@@ -11,6 +11,8 @@
 	
    <message name="SayHelloResponse">
       <part name="greeting" type="xsd:string"/>
+      <part name="sender" type="xsd:string"/>
+      <part name="timestamp" type="xsd:string"/>
    </message>
 
    <portType name="Hello_PortType">

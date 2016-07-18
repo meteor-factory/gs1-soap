@@ -6,9 +6,16 @@
   <h1>Welcome to Meteor!</h1>
   <h2>Hello, world!</h2>
   {{> hello}}
+  <hr />
+  {{> wsdl}}
 </body>
 
 <template name="hello">
   <button>Click Me</button>
   <p>You've pressed the button {{counter}} times.</p>
+</template>
+
+<template name="wsdl">
+    <button>Call WSDL</button>
+    <p>{{text}}</p>
 </template>
