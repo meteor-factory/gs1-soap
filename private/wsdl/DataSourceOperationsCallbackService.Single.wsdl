@@ -1,0 +1,2884 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions name="DataSourceOperationsCallbackService"
+                  targetNamespace="http://services.gs1tradesync.com/2016/05/06"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata"
+                  xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex"
+                  xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy"
+                  xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract"
+                  xmlns:i0="https://services.gs1tradesync.com/2016/05/06"
+                  xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+                  xmlns:tns="http://services.gs1tradesync.com/2016/05/06"
+                  xmlns:wsa10="http://www.w3.org/2005/08/addressing"
+                  xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+                  xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing">
+    <wsp:Policy wsu:Id="wsHttpEndpoint_policy">
+        <wsp:ExactlyOne>
+            <wsp:All>
+                <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+                    <wsp:Policy>
+                        <sp:TransportToken>
+                            <wsp:Policy>
+                                <sp:HttpsToken RequireClientCertificate="true"/>
+                            </wsp:Policy>
+                        </sp:TransportToken>
+                        <sp:AlgorithmSuite>
+                            <wsp:Policy>
+                                <sp:Basic256/>
+                            </wsp:Policy>
+                        </sp:AlgorithmSuite>
+                        <sp:Layout>
+                            <wsp:Policy>
+                                <sp:Strict/>
+                            </wsp:Policy>
+                        </sp:Layout>
+                    </wsp:Policy>
+                </sp:TransportBinding>
+                <wsaw:UsingAddressing/>
+            </wsp:All>
+        </wsp:ExactlyOne>
+    </wsp:Policy>
+    <wsdl:types>
+        <xs:schema elementFormDefault="qualified" targetNamespace="http://services.gs1tradesync.com/2016/05/06"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:import namespace="urn:gs1:gdsn:catalogue_item_confirmation:xsd:3"/>
+            <xs:import namespace="urn:gs1:gdsn:gs1_response:xsd:3"/>
+            <xs:element name="ReceiveCatalogueItemConfirmation">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" maxOccurs="1" name="catalogueItemConfirmationMessage"
+                                    type="tns:ArrayOfCatalogueItemConfirmationType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="ArrayOfCatalogueItemConfirmationType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="CatalogueItemConfirmationType" nillable="true"
+                                type="q1:CatalogueItemConfirmationType"
+                                xmlns:q1="urn:gs1:gdsn:catalogue_item_confirmation:xsd:3"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="ReceiveCatalogueItemConfirmationResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" maxOccurs="1" name="ReceiveCatalogueItemConfirmationResult"
+                                    type="q2:GS1ResponseType" xmlns:q2="urn:gs1:gdsn:gs1_response:xsd:3"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:catalogue_item_confirmation:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:catalogue_item_confirmation:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:import namespace="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+            <xs:complexType name="CatalogueItemConfirmationType">
+                <xs:complexContent mixed="false">
+                    <xs:extension base="q1:DocumentType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                        name="catalogueItemConfirmationIdentification"
+                                        type="q1:EntityIdentificationType"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                        name="catalogueItemConfirmationState"
+                                        type="tns:CatalogueItemConfirmationStateType"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="catalogueItemReference"
+                                        type="q2:CatalogueItemReferenceType" xmlns:q2="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                            <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified"
+                                        name="catalogueItemConfirmationStatusDetail"
+                                        type="tns:CatalogueItemConfirmationStatusDetailType"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="CatalogueItemConfirmationStateType">
+                <xs:sequence>
+                    <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="catalogueItemConfirmationStateCode"
+                                type="q3:SynchronisationConfirmationStateEnumerationType"
+                                xmlns:q3="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="recipientGLN" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="recipientDataPool"
+                                type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CatalogueItemConfirmationStatusDetailType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="confirmationStatusCatalogueItem"
+                                type="q4:CatalogueItemReferenceType" xmlns:q4="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified"
+                                name="catalogueItemConfirmationStatus" type="tns:CatalogueItemConfirmationStatusType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CatalogueItemConfirmationStatusType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="confirmationStatusCode"
+                                type="q5:ConfirmationStatusReasonCodeType" xmlns:q5="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="confirmationStatusCodeDescription"
+                                type="q6:Description1000Type" xmlns:q6="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                name="additionalConfirmationStatusLongDescription" type="q7:Description1000Type"
+                                xmlns:q7="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="correctiveAction"
+                                type="tns:CorrectiveActionType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CorrectiveActionType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="correctiveActionCode"
+                                type="q8:CorrectiveActionCodeType" xmlns:q8="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="expectedCorrectiveInformation"
+                                type="q9:Description1000Type" xmlns:q9="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:shared:shared_common:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:shared:shared_common:xsd:3">
+            <xs:complexType name="DocumentType" abstract="true">
+                <xs:sequence>
+                    <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="creationDateTime"
+                                type="xs:dateTime"/>
+                    <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="documentStatusCode"
+                                type="tns:DocumentStatusEnumerationType"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="documentActionCode"
+                                type="tns:DocumentActionEnumerationType"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="documentStructureVersion"
+                                type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="lastUpdateDateTime"
+                                type="xs:dateTime"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="revisionNumber"
+                                type="xs:positiveInteger"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="extension"
+                                type="tns:ExtensionType"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="documentEffectiveDate"
+                                type="tns:DateOptionalTimeType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:simpleType name="DocumentStatusEnumerationType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="ADDITIONAL_TRANSMISSION"/>
+                    <xs:enumeration value="COPY"/>
+                    <xs:enumeration value="ORIGINAL"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="DocumentActionEnumerationType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="ADD"/>
+                    <xs:enumeration value="CHANGE_BY_REFRESH"/>
+                    <xs:enumeration value="DELETE"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:complexType name="ExtensionType">
+                <xs:sequence>
+                    <xs:any minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="DateOptionalTimeType">
+                <xs:sequence>
+                    <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="date" type="xs:date"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="time" type="xs:time"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="EntityIdentificationType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="entityIdentification"
+                                type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="contentOwner"
+                                type="tns:PartyIdentificationType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="PartyIdentificationType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="gln" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified"
+                                name="additionalPartyIdentification" type="tns:AdditionalPartyIdentificationType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="AdditionalPartyIdentificationType">
+                <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                        <xs:attribute name="additionalPartyIdentificationTypeCode" type="xs:string"/>
+                        <xs:attribute name="codeListVersion" type="xs:string"/>
+                    </xs:extension>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="DocumentReferenceType">
+                <xs:complexContent mixed="false">
+                    <xs:extension base="tns:EntityIdentificationType">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="creationDateTime"
+                                        type="xs:dateTime"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="revisionNumber"
+                                        type="xs:positiveInteger"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="lineItemNumber"
+                                        type="xs:positiveInteger"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="TypedEntityIdentificationType">
+                <xs:complexContent mixed="false">
+                    <xs:extension base="tns:EntityIdentificationType">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="entityTypeCode"
+                                        type="tns:EntityTypeCodeType"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="EntityTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="tns:GS1CodeType"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="GS1CodeType">
+                <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                        <xs:attribute name="codeListVersion" type="xs:string"/>
+                    </xs:extension>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="CurrencyCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="tns:GS1CodeType"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="DateFormatCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="tns:GS1CodeType"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="FinancialAccountNumberTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="tns:GS1CodeType"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="FinancialRoutingNumberTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="tns:GS1CodeType"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="IncotermsCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="tns:GS1CodeType"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="LanguageCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="tns:GS1CodeType"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="MeasurementUnitCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="tns:GS1CodeType"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="NutrientTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="tns:GS1CodeType"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="TimeMeasurementUnitCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="tns:GS1CodeType"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PartyRoleCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="tns:GS1CodeType"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PaymentMethodCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="tns:GS1CodeType"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PaymentTermsTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="tns:GS1CodeType"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="TaxCategoryCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="tns:GS1CodeType"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="TemperatureMeasurementUnitCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="tns:GS1CodeType"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="CountrySubdivisionCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="tns:GS1CodeType"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="AdditionalConsignmentIdentificationTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="tns:GS1CodeType"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="AdditionalIndividualAssetIdentificationTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="tns:GS1CodeType"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="AdditionalLogisticUnitIdentificationTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="tns:GS1CodeType"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="AdditionalPartyIdentificationTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="tns:GS1CodeType"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="AdditionalReturnableAssetIdentificationTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="tns:GS1CodeType"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="AdditionalServiceRelationIdentificationTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="tns:GS1CodeType"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="AdditionalShipmentIdentificationTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="tns:GS1CodeType"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="AdditionalTradeItemIdentificationTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="tns:GS1CodeType"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="AllowanceChargeTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="tns:GS1CodeType"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="BarCodeTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="tns:GS1CodeType"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="CommunicationChannelCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="tns:GS1CodeType"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ContactTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="tns:GS1CodeType"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="CountryCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="tns:GS1CodeType"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="AddressType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="city" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="cityCode" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="countryCode"
+                                type="tns:CountryCodeType"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="countyCode" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="crossStreet" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="currencyOfPartyCode"
+                                type="tns:CurrencyCodeType"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="languageOfThePartyCode"
+                                type="tns:LanguageCodeType"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="pOBoxNumber" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="postalCode" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="provinceCode" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="state" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="streetAddressOne"
+                                type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="streetAddressTwo"
+                                type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="streetAddressThree"
+                                type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="geographicalCoordinates"
+                                type="tns:GeographicalCoordinatesType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="GeographicalCoordinatesType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="latitude" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="longitude" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ContactType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="contactTypeCode"
+                                type="tns:ContactTypeCodeType"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="personName" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="departmentName" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="jobTitle" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="responsibility"
+                                type="tns:Description70Type"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="communicationChannel"
+                                type="tns:CommunicationChannelType"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified"
+                                name="afterHoursCommunicationChannel" type="tns:CommunicationChannelType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Description70Type">
+                <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                        <xs:attribute name="languageCode" type="xs:string"/>
+                        <xs:attribute name="codeListVersion" type="xs:string"/>
+                    </xs:extension>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="CommunicationChannelType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="communicationChannelCode"
+                                type="tns:CommunicationChannelCodeType"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="communicationValue"
+                                type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="communicationChannelName"
+                                type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Description200Type">
+                <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                        <xs:attribute name="languageCode" type="xs:string"/>
+                        <xs:attribute name="codeListVersion" type="xs:string"/>
+                    </xs:extension>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="TradeItemIdentificationType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="gtin" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified"
+                                name="additionalTradeItemIdentification"
+                                type="tns:AdditionalTradeItemIdentificationType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="AdditionalTradeItemIdentificationType">
+                <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                        <xs:attribute name="additionalTradeItemIdentificationTypeCode" type="xs:string"/>
+                        <xs:attribute name="codeListVersion" type="xs:string"/>
+                    </xs:extension>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:simpleType name="NonBinaryLogicEnumerationType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="FALSE"/>
+                    <xs:enumeration value="NOT_APPLICABLE"/>
+                    <xs:enumeration value="TRUE"/>
+                    <xs:enumeration value="UNSPECIFIED"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:complexType name="Description1000Type">
+                <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                        <xs:attribute name="languageCode" type="xs:string"/>
+                        <xs:attribute name="codeListVersion" type="xs:string"/>
+                    </xs:extension>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="AmountType">
+                <xs:simpleContent>
+                    <xs:extension base="xs:float">
+                        <xs:attribute name="currencyCode" type="xs:string"/>
+                        <xs:attribute name="codeListVersion" type="xs:string"/>
+                    </xs:extension>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="CodeType">
+                <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                        <xs:attribute name="codeDescription" type="xs:string"/>
+                        <xs:attribute name="codeListAgencyCode" type="xs:string"/>
+                        <xs:attribute name="codeListAgencyCodeListVersion" type="xs:string"/>
+                        <xs:attribute name="codeListAgencyName" type="xs:string"/>
+                        <xs:attribute name="codeListName" type="xs:string"/>
+                        <xs:attribute name="codeListURI" type="xs:string"/>
+                        <xs:attribute name="codeListVersion" type="xs:string"/>
+                    </xs:extension>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="Description5000Type">
+                <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                        <xs:attribute name="languageCode" type="xs:string"/>
+                        <xs:attribute name="codeListVersion" type="xs:string"/>
+                    </xs:extension>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="MeasurementType">
+                <xs:simpleContent>
+                    <xs:extension base="xs:decimal">
+                        <xs:attribute name="measurementUnitCode" type="xs:string"/>
+                        <xs:attribute name="codeListVersion" type="xs:string"/>
+                    </xs:extension>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="TargetMarketType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="targetMarketCountryCode"
+                                type="tns:CountryCodeType"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="targetMarketSubdivisionCode"
+                                type="tns:CountrySubdivisionCodeType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="IdentifierType">
+                <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                        <xs:attribute name="identificationSchemeAgencyCode" type="xs:string"/>
+                        <xs:attribute name="identificationSchemeAgencyCodeCodeListVersion" type="xs:string"/>
+                        <xs:attribute name="identificationSchemeAgencyName" type="xs:string"/>
+                        <xs:attribute name="identificationSchemeName" type="xs:string"/>
+                    </xs:extension>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:simpleType name="ResponseStatusEnumerationType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="ACCEPTED"/>
+                    <xs:enumeration value="MODIFIED"/>
+                    <xs:enumeration value="NO_ACTION"/>
+                    <xs:enumeration value="REJECTED"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:search_result:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:search_result:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:import namespace="urn:gs1:gdsn:party_synchronisation_common:xsd:3"/>
+            <xs:import namespace="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+            <xs:complexType name="SearchResultType">
+                <xs:complexContent mixed="false">
+                    <xs:extension base="q1:DocumentType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="searchResultIdentification"
+                                        type="q1:EntityIdentificationType"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                        name="searchRequestIdentification" type="q1:EntityIdentificationType"/>
+                            <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="isResultFound"
+                                        type="xs:boolean"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="receiver"
+                                        type="xs:string"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="sender" type="xs:string"/>
+                            <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="party"
+                                        type="q2:PartyType" xmlns:q2="urn:gs1:gdsn:party_synchronisation_common:xsd:3"/>
+                            <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="glnRegistryParty"
+                                        type="tns:GLNRegistryPartyType"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="GLNRegistryPartyType">
+                <xs:sequence>
+                    <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="isPartyActive" type="xs:boolean"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="registeringParty"
+                                type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="city" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="countryCode"
+                                type="q3:CountryCodeType" xmlns:q3="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="lastUpdateDateTime"
+                                type="xs:dateTime"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="lastUpdateParty" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="partyEndEffectiveDateTime"
+                                type="xs:dateTime"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="partyRoleCode"
+                                type="q4:PartyRoleCodeType" xmlns:q4="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="partyStartEffectiveDateTime"
+                                type="xs:dateTime"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="registrationDateTime"
+                                type="xs:dateTime"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="avpList"
+                                type="q5:GS1_AttributeValuePairListType" xmlns:q5="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:marketing_information:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:marketing_information:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="SpecialItemCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="SeasonParameterCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q2:GS1CodeType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="TargetConsumerGenderCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q3:GS1CodeType" xmlns:q3="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:allergen_information:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:allergen_information:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="AllergenTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:apparel_information:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:apparel_information:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="HangerStandardAgencyCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="SizeGroupCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q2:GS1CodeType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="SizeSystemCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q3:GS1CodeType" xmlns:q3="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="SizeTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q4:GS1CodeType" xmlns:q4="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified"
+                   targetNamespace="urn:gs1:gdsn:audio_visual_media_content_information:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:audio_visual_media_content_information:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="AudioVisualMediaContributorTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ClosedCaptioningCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q2:GS1CodeType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="DistributionMediaTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q3:GS1CodeType" xmlns:q3="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="DubbedSubtitledCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q4:GS1CodeType" xmlns:q4="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="DVDRegionCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q5:GS1CodeType" xmlns:q5="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="GameFormatCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q6:GS1CodeType" xmlns:q6="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified"
+                   targetNamespace="urn:gs1:gdsn:audio_visual_media_product_description_information:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:audio_visual_media_product_description_information:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="AudioVisualMediaDateTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified"
+                   targetNamespace="urn:gs1:gdsn:audio_visual_media_production_information:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:audio_visual_media_production_information:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="AudioSoundTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="DigitalisationLevelTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q2:GS1CodeType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="VisualMediaColourCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q3:GS1CodeType" xmlns:q3="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:battery_information:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:battery_information:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="BatteryTechnologyTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="BatteryTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q2:GS1CodeType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:chemical_regulation_information:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:chemical_regulation_information:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="ChemicalPhysicalStateCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ChemicalPropertyTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q2:GS1CodeType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:dairy_fish_meat_poultry:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:dairy_fish_meat_poultry:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="CheeseMaturationProcessContainerTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="RennetTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q2:GS1CodeType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="SurfaceOfCheeseAtEndOfRipeningCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q3:GS1CodeType" xmlns:q3="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:dangerous_substance_information:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:dangerous_substance_information:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="DangerousSubstancesWaterSolubilityCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:delivery_purchasing_information:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:delivery_purchasing_information:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="OrderableReturnableConditionsCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="RightOfReturnForNonSoldTradeItemCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q2:GS1CodeType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:diet_information:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:diet_information:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="DietTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified"
+                   targetNamespace="urn:gs1:gdsn:electronic_device_characteristics_information:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:electronic_device_characteristics_information:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="AudioVisualConnectionInputDirectionCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="AudioVisualConnectionLocationCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q2:GS1CodeType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="AudioVisualConnectionTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q3:GS1CodeType" xmlns:q3="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="DetachableSpeakerTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q4:GS1CodeType" xmlns:q4="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ExternalMemoryTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q5:GS1CodeType" xmlns:q5="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="FixedSpeakerLocationCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q6:GS1CodeType" xmlns:q6="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="HDMIFeatureCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q7:GS1CodeType" xmlns:q7="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="HDMITestingAgencyCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q8:GS1CodeType" xmlns:q8="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="InternalMemoryTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q9:GS1CodeType" xmlns:q9="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="RemoteControlTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q10:GS1CodeType" xmlns:q10="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="SignalProcessingTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q11:GS1CodeType" xmlns:q11="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="SurroundSoundDigitalDecoderTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q12:GS1CodeType" xmlns:q12="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="TunerTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q13:GS1CodeType" xmlns:q13="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:food_and_beverage_ingredient:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:food_and_beverage_ingredient:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="GrapeVarietyCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="IngredientOfConcernCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q2:GS1CodeType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified"
+                   targetNamespace="urn:gs1:gdsn:food_and_beverage_preparation_serving:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:food_and_beverage_preparation_serving:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="ProductYieldTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified"
+                   targetNamespace="urn:gs1:gdsn:food_and_beverage_properties_information:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:food_and_beverage_properties_information:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="MicrobiologicalOrganismCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PhysiochemicalCharacteristicCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q2:GS1CodeType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:gdsn_common:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:gdsn_common:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="AdditionalTradeItemClassificationCodeListCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="AspectRatioDescriptionCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q2:GS1CodeType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="AspectRatioDimensionCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q3:GS1CodeType" xmlns:q3="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="CatalogueItemConfirmationStatusCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q4:GS1CodeType" xmlns:q4="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ConfirmationStatusReasonCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q5:GS1CodeType" xmlns:q5="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="CorrectiveActionCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q6:GS1CodeType" xmlns:q6="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="CriteriaJoinTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q7:GS1CodeType" xmlns:q7="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="CriteriaOperatorTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q8:GS1CodeType" xmlns:q8="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="DangerousGoodsTransportCategoryCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q9:GS1CodeType" xmlns:q9="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="DimensionTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q10:GS1CodeType" xmlns:q10="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="DisplayTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q11:GS1CodeType" xmlns:q11="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="DistributionMethodCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q12:GS1CodeType" xmlns:q12="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ExceptionMessageTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q13:GS1CodeType" xmlns:q13="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="GrowingMethodCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q14:GS1CodeType" xmlns:q14="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="HierarchyDeletionReasonCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q15:GS1CodeType" xmlns:q15="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="IsReloadReasonCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q16:GS1CodeType" xmlns:q16="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="LevelOfContainmentCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q17:GS1CodeType" xmlns:q17="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="MaturationMethodCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q18:GS1CodeType" xmlns:q18="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="MeasurementPrecisionCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q19:GS1CodeType" xmlns:q19="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="OrganicClaimAgencyCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q20:GS1CodeType" xmlns:q20="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="OrganicProductPlaceOfFarmingCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q21:GS1CodeType" xmlns:q21="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="OrganicTradeItemCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q22:GS1CodeType" xmlns:q22="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PackagingMaterialTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q23:GS1CodeType" xmlns:q23="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PhaseOfMatterCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q24:GS1CodeType" xmlns:q24="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PreliminaryItemStatusCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q25:GS1CodeType" xmlns:q25="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PreparationTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q26:GS1CodeType" xmlns:q26="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PreservationTechniqueTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q27:GS1CodeType" xmlns:q27="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ProductActivityTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q28:GS1CodeType" xmlns:q28="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ReferencedFileTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q29:GS1CodeType" xmlns:q29="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ReferencedTradeItemTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q30:GS1CodeType" xmlns:q30="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="RegistryCatalogueItemStateCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q31:GS1CodeType" xmlns:q31="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="SourceAnimalCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q32:GS1CodeType" xmlns:q32="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="SustainabilityFeatureCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q33:GS1CodeType" xmlns:q33="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="TemperatureQualifierCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q34:GS1CodeType" xmlns:q34="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="TradeChannelCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q35:GS1CodeType" xmlns:q35="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="TradeItemUnitDescriptorCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q36:GS1CodeType" xmlns:q36="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="TradeItemContextCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q37:GS1CodeType" xmlns:q37="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PartyInRoleType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified"
+                                name="additionalPartyIdentification" type="q38:AdditionalPartyIdentificationType"
+                                xmlns:q38="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="gln" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="partyAddress" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="partyName" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="partyRoleCode"
+                                type="q39:PartyRoleCodeType" xmlns:q39="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="GS1_AttributeValuePairListType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="compoundStringAVP"
+                                type="tns:CompoundStringAttributeValuePairType"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="stringAVP"
+                                type="tns:StringAttributeValuePairType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CompoundStringAttributeValuePairType">
+                <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                        <xs:attribute name="attributeName" type="xs:string"/>
+                        <xs:attribute name="attributeCode" type="xs:string"/>
+                        <xs:attribute name="codeListNameCode" type="xs:string"/>
+                        <xs:attribute name="codeListVersion" type="xs:string"/>
+                    </xs:extension>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="StringAttributeValuePairType">
+                <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                        <xs:attribute name="attributeName" type="xs:string"/>
+                    </xs:extension>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="CatalogueItemReferenceType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="dataSource" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="gtin" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="targetMarketCountryCode"
+                                type="q40:CountryCodeType" xmlns:q40="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="targetMarketSubdivisionCode"
+                                type="q41:CountrySubdivisionCodeType" xmlns:q41="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:simpleType name="SynchronisationConfirmationStateEnumerationType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="RECEIVED"/>
+                    <xs:enumeration value="REJECTED"/>
+                    <xs:enumeration value="REVIEW"/>
+                    <xs:enumeration value="SYNCHRONISED"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:healthcare_item_information:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:healthcare_item_information:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="PrescriptionTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:health_related_information:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:health_related_information:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="HealthClaimCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="NutritionalLabelTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q2:GS1CodeType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="NutritionalProgramCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q3:GS1CodeType" xmlns:q3="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:health_wellness_packaging_marking:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:health_wellness_packaging_marking:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="PackagingMarkedDietAllergenCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PackagingMarkedFreeFromCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q2:GS1CodeType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:medical_device_trade_item:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:medical_device_trade_item:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="HealthcareTradeItemReusabilityTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="MRICompatibilityCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q2:GS1CodeType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="SterilisationTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q3:GS1CodeType" xmlns:q3="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:nutritional_information:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:nutritional_information:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="FoodBeverageCompositionDatabaseCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="NutrientBasisQuantityTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q2:GS1CodeType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="NutritionalClaimCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q3:GS1CodeType" xmlns:q3="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="NutritionalClaimNutrientElementCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q4:GS1CodeType" xmlns:q4="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="NutritionalClaimTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q5:GS1CodeType" xmlns:q5="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:onix_publication_file_information:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:onix_publication_file_information:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="ONIXAudienceCodeValueCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ONIXAudiencePrecisionCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q2:GS1CodeType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ONIXAudienceRangeQualifierCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q3:GS1CodeType" xmlns:q3="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ONIXAudienceTypeCodeListCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q4:GS1CodeType" xmlns:q4="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ONIXContentDateRoleTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q5:GS1CodeType" xmlns:q5="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ONIXContributorPlaceTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q6:GS1CodeType" xmlns:q6="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ONIXContributorRoleCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q7:GS1CodeType" xmlns:q7="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ONIXEditionTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q8:GS1CodeType" xmlns:q8="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ONIXEpubTechnicalProtectionTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q9:GS1CodeType" xmlns:q9="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ONIXExtentTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q10:GS1CodeType" xmlns:q10="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ONIXExtentUnitTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q11:GS1CodeType" xmlns:q11="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ONIXIllustrationTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q12:GS1CodeType" xmlns:q12="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ONIXNameTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q13:GS1CodeType" xmlns:q13="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ONIXPublicationDateTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q14:GS1CodeType" xmlns:q14="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ONIXPublicationDescriptionTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q15:GS1CodeType" xmlns:q15="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ONIXPublisherRoleTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q16:GS1CodeType" xmlns:q16="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ONIXSalesRightsTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q17:GS1CodeType" xmlns:q17="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ONIXSeriesIdentifierTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q18:GS1CodeType" xmlns:q18="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ONIXSubjectSchemeIdentifierCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q19:GS1CodeType" xmlns:q19="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ONIXTitleTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q20:GS1CodeType" xmlns:q20="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:packaging_information:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:packaging_information:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="AverageDistanceToPointOfPackagingCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PackageTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q2:GS1CodeType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PackagingFeatureCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q3:GS1CodeType" xmlns:q3="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PackagingFunctionCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q4:GS1CodeType" xmlns:q4="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PackagingMaterialAppliedProcessCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q5:GS1CodeType" xmlns:q5="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PackagingMaterialPerformanceCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q6:GS1CodeType" xmlns:q6="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PackagingRecyclingProcessTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q7:GS1CodeType" xmlns:q7="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PackagingRecyclingSchemeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q8:GS1CodeType" xmlns:q8="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PackagingShapeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q9:GS1CodeType" xmlns:q9="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PackagingTermsAndConditionsCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q10:GS1CodeType" xmlns:q10="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PlatformTermsAndConditionsCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q11:GS1CodeType" xmlns:q11="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PlatformTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q12:GS1CodeType" xmlns:q12="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:packaging_marking:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:packaging_marking:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="DateOnPackagingFormatTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PackagingMarkedLabelAccreditationCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q2:GS1CodeType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="SerialNumberLocationCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q3:GS1CodeType" xmlns:q3="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="TradeItemDateOnPackagingTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q4:GS1CodeType" xmlns:q4="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:packaging_sustainability:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:packaging_sustainability:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="AcidificationMeasurementProtocolCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="AcidificationMeasurementReferenceSubstanceCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q2:GS1CodeType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="AquaticEutrophicationModelCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q3:GS1CodeType" xmlns:q3="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="AquaticEutrophicationReferenceSubstanceCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q4:GS1CodeType" xmlns:q4="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="AquaticEutrophicationWaterBodyTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q5:GS1CodeType" xmlns:q5="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="CumulativeEnergyDemandProtocolCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q6:GS1CodeType" xmlns:q6="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="CumulativeEnergyDemandReferenceSubstanceCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q7:GS1CodeType" xmlns:q7="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="CumulativeEnergyDemandTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q8:GS1CodeType" xmlns:q8="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="FreshWaterEcotoxicityModelCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q9:GS1CodeType" xmlns:q9="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="FreshWaterEcotoxicityReferenceSubstanceCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q10:GS1CodeType" xmlns:q10="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="FunctionalBasisUnitCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q11:GS1CodeType" xmlns:q11="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="GlobalWarmingPotentialEquivalentBasisYearsCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q12:GS1CodeType" xmlns:q12="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="GlobalWarmingPotentialEquivalentProtocolCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q13:GS1CodeType" xmlns:q13="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="GlobalWarmingPotentialEquivalentSubstanceCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q14:GS1CodeType" xmlns:q14="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="HazardousSubstancesMinimizationCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q15:GS1CodeType" xmlns:q15="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="MassEquivalentCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q16:GS1CodeType" xmlns:q16="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="MassEquivalentProtocolCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q17:GS1CodeType" xmlns:q17="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PackagingChainOfCustodySourceCertifiedCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q18:GS1CodeType" xmlns:q18="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PackagingLevelTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q19:GS1CodeType" xmlns:q19="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PackagingRecoveryRateTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q20:GS1CodeType" xmlns:q20="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PackagingRecycledContentTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q21:GS1CodeType" xmlns:q21="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PackagingRenewableContentTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q22:GS1CodeType" xmlns:q22="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PackagingReusabilityStandardCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q23:GS1CodeType" xmlns:q23="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ProofOfOptimizedPackagingWeightStandardCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q24:GS1CodeType" xmlns:q24="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ProofOfPackagingWeightReductionStandardCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q25:GS1CodeType" xmlns:q25="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="SourceCertificationSystemProtocolCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q26:GS1CodeType" xmlns:q26="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="TotalPackagingEconomicCostMeasurementCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q27:GS1CodeType" xmlns:q27="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ToxicityMeasurementProtocolCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q28:GS1CodeType" xmlns:q28="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ToxicityReferenceSubstanceCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q29:GS1CodeType" xmlns:q29="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:party_synchronisation_common:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:party_synchronisation_common:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:import namespace="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+            <xs:complexType name="MessageCapabilityCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ProcessCapabilityCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q2:GS1CodeType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="RecordStatusCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q3:GS1CodeType" xmlns:q3="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PartyType">
+                <xs:sequence>
+                    <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="isPartyActive" type="xs:boolean"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="lastUpdateDateTime"
+                                type="xs:dateTime"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="lastUpdateParty" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="partyEndEffectiveDate"
+                                type="xs:dateTime"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="partyStartEffectiveDate"
+                                type="xs:dateTime"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="registeringParty"
+                                type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="registrationDateTime"
+                                type="xs:dateTime"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="informationProviderOfParty"
+                                type="q4:PartyIdentificationType" xmlns:q4="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="organisationHighestLevelParty"
+                                type="q5:PartyIdentificationType" xmlns:q5="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="partyAddress" type="q6:AddressType"
+                                xmlns:q6="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="partyContact"
+                                type="q7:ContactType" xmlns:q7="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="partyCapability"
+                                type="tns:PartyCapabilityType"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="partyInRole"
+                                type="q8:PartyInRoleType" xmlns:q8="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="avpList"
+                                type="q9:GS1_AttributeValuePairListType" xmlns:q9="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="PartyCapabilityType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="messageCapability"
+                                type="tns:MessageCapabilityType"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="processCapability"
+                                type="tns:ProcessCapabilityType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="MessageCapabilityType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="messageCapabilityCode"
+                                type="tns:MessageCapabilityCodeType"/>
+                    <xs:element minOccurs="1" maxOccurs="1" form="unqualified"
+                                name="messageCapabilityEffectiveStartDateTime" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                name="messageCapabilityEffectiveEndDateTime" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="messageCapabilityProxyParty"
+                                type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ProcessCapabilityType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="processCapabilityCode"
+                                type="tns:ProcessCapabilityCodeType"/>
+                    <xs:element minOccurs="1" maxOccurs="1" form="unqualified"
+                                name="processCapabilityEffectiveStartDateTime" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                name="processCapabilityEffectiveEndDateTime" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="processCapabilityProxyParty"
+                                type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="registeredContext"
+                                type="tns:RegisteredContextType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="RegisteredContextType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="contextIdentification"
+                                type="q10:TradeItemContextCodeType" xmlns:q10="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                    <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="contextEffectiveStartDateTime"
+                                type="xs:dateTime"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="contextEffectiveEndDateTime"
+                                type="xs:dateTime"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="registeredStatusCode"
+                                type="tns:RecordStatusCodeType"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:physical_resource_usage:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:physical_resource_usage:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="PhysicalResourceTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PhysicalResourceUsageMeasurementTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q2:GS1CodeType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="RunModeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q3:GS1CodeType" xmlns:q3="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:place_of_item_activity:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:place_of_item_activity:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="ImportClassificationTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:plumbing_hvac_pipe_information:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:plumbing_hvac_pipe_information:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="BendAngleCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="MeshMaterialCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q2:GS1CodeType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="MeshSizeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q3:GS1CodeType" xmlns:q3="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PlumbingControlTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q4:GS1CodeType" xmlns:q4="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PlumbingHVACConnectionAgencyCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q5:GS1CodeType" xmlns:q5="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PlumbingHVACConnectionTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q6:GS1CodeType" xmlns:q6="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ThreadTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q7:GS1CodeType" xmlns:q7="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="WorkingPressureRatingClassCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q8:GS1CodeType" xmlns:q8="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:product_characteristics:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:product_characteristics:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="ProductCharacteristicCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:promotional_item_information:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:promotional_item_information:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="PromotionTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:propellant_information:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:propellant_information:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="FlammableAerosolContainmentCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:publication_title_rating:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:publication_title_rating:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="RatingContentDescriptorCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified"
+                   targetNamespace="urn:gs1:gdsn:referenced_file_detail_information:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:referenced_file_detail_information:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="FileColourSchemeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ItemDepictionCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q2:GS1CodeType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ItemPositionCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q3:GS1CodeType" xmlns:q3="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:regulated_trade_item:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:regulated_trade_item:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="RegulationTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:safety_data_sheet:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:safety_data_sheet:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="FlashPointTestMethodCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="GHSSignalWordsCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q2:GS1CodeType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="GHSSymbolDescriptionCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q3:GS1CodeType" xmlns:q3="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ProtectiveEquipmentBodyAreaCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q4:GS1CodeType" xmlns:q4="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="RecommendedStatusCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q5:GS1CodeType" xmlns:q5="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="RouteOfExposureCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q6:GS1CodeType" xmlns:q6="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="SDSStandardCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q7:GS1CodeType" xmlns:q7="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="SpecificGravityReferenceMaterialCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q8:GS1CodeType" xmlns:q8="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="TestSpeciesCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q9:GS1CodeType" xmlns:q9="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="WaterSolubilityTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q10:GS1CodeType" xmlns:q10="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:sales_information:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:sales_information:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="BrandDistributionTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="ConsumerSalesConditionTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q2:GS1CodeType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PriceByMeasureTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q3:GS1CodeType" xmlns:q3="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PriceComparisonContentTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q4:GS1CodeType" xmlns:q4="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="RecommendedConsumerPickupAreaCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q5:GS1CodeType" xmlns:q5="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="TradeItemConditionCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q6:GS1CodeType" xmlns:q6="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="TradeItemPriceTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q7:GS1CodeType" xmlns:q7="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:search_request:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:search_request:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:import namespace="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+            <xs:complexType name="SearchTopicTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="SearchRequestType">
+                <xs:complexContent mixed="false">
+                    <xs:extension base="q2:DocumentType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                        name="searchRequestIdentification" type="q2:EntityIdentificationType"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="sender" type="xs:string"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="receiver"
+                                        type="xs:string"/>
+                            <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="searchTopic"
+                                        type="tns:SearchTopicTypeCodeType"/>
+                            <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="searchCriteria"
+                                        type="tns:SearchCriteriaType"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="SearchCriteriaType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="searchCriteriaSequenceNumber"
+                                type="xs:nonNegativeInteger"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="criteriaJoinType"
+                                type="q3:CriteriaJoinTypeCodeType" xmlns:q3="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="criteriaObject"
+                                type="tns:CriteriaObjectType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CriteriaObjectType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="criteriaOperator"
+                                type="q4:CriteriaOperatorTypeCodeType" xmlns:q4="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="criteriaObjectValue"
+                                type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="xPath" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:security_tag_information:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:security_tag_information:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="SecurityTagLocationCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="SecurityTagTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q2:GS1CodeType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:software_system_requirements:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:software_system_requirements:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="SystemRequirementsQualifierTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:textile_material:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:textile_material:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="MaterialAgencyCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified"
+                   targetNamespace="urn:gs1:gdsn:trade_item_data_carrier_and_identification:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:trade_item_data_carrier_and_identification:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="ApplicationIdentifierTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="DataCarrierFamilyTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q2:GS1CodeType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="DataCarrierPresenceCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q3:GS1CodeType" xmlns:q3="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="DataCarrierTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q4:GS1CodeType" xmlns:q4="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="GS1TradeItemIdentificationKeyTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q5:GS1CodeType" xmlns:q5="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:trade_item_description:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:trade_item_description:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="TradeItemVariantTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:trade_item_handling:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:trade_item_handling:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="StackingFactorTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:trade_item_measurements:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:trade_item_measurements:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="NestingDirectionCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="NestingTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q2:GS1CodeType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="OrientationTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q3:GS1CodeType" xmlns:q3="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="PegHoleTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q4:GS1CodeType" xmlns:q4="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified"
+                   targetNamespace="urn:gs1:gdsn:trade_item_temperature_information:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:trade_item_temperature_information:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="TradeItemTemperatureConditionTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified"
+                   targetNamespace="urn:gs1:gdsn:transportation_hazardous_classification:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:transportation_hazardous_classification:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="HazardousMaterialsTransportationModeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:variable_trade_item_information:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:variable_trade_item_information:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="VariableTradeItemTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:video_display_device_information:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:video_display_device_information:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="AudioVisualItemInstallationTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q1:GS1CodeType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="CombFilterTechnologyTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q2:GS1CodeType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="DisplayResolutionCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q3:GS1CodeType" xmlns:q3="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="DisplayScreenTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q4:GS1CodeType" xmlns:q4="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="MultiPictureDisplayCapabilityTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q5:GS1CodeType" xmlns:q5="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="TelevisionInformationServiceTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q6:GS1CodeType" xmlns:q6="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+            <xs:complexType name="VESAWallMountTypeCodeType">
+                <xs:simpleContent>
+                    <xs:extension base="q7:GS1CodeType" xmlns:q7="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:registry_party_data_dump:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:registry_party_data_dump:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:import namespace="urn:gs1:gdsn:party_synchronisation_common:xsd:3"/>
+            <xs:complexType name="RegistryPartyDataDumpType">
+                <xs:complexContent mixed="false">
+                    <xs:extension base="q1:DocumentType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                        name="registryPartyDataDumpIdentification" type="q1:EntityIdentificationType"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="informationProvider"
+                                        type="xs:string"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="informationRecipient"
+                                        type="xs:string"/>
+                            <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="party"
+                                        type="q2:PartyType" xmlns:q2="urn:gs1:gdsn:party_synchronisation_common:xsd:3"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:basic_party_registration:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:basic_party_registration:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:import namespace="urn:gs1:gdsn:party_synchronisation_common:xsd:3"/>
+            <xs:complexType name="BasicPartyRegistrationType">
+                <xs:complexContent mixed="false">
+                    <xs:extension base="q1:DocumentType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                        name="basicPartyRegistrationIdentification" type="q1:EntityIdentificationType"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="partyDataPool"
+                                        type="xs:string"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="transmittingDataPool"
+                                        type="xs:string"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="party" type="q2:PartyType"
+                                        xmlns:q2="urn:gs1:gdsn:party_synchronisation_common:xsd:3"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:registry_catalogue_item:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:registry_catalogue_item:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:import namespace="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+            <xs:complexType name="RegistryCatalogueItemType">
+                <xs:complexContent mixed="false">
+                    <xs:extension base="q1:DocumentType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                        name="registryCatalogueItemIdentification" type="q1:EntityIdentificationType"/>
+                            <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="gpcCategoryCode"
+                                        type="xs:string"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="sourceDataPool"
+                                        type="xs:string"/>
+                            <xs:element minOccurs="1" maxOccurs="1" form="unqualified"
+                                        name="registryCatalogueItemStateCode"
+                                        type="tns:RegistryCatalogueItemStateEnumerationType"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="catalogueItemReference"
+                                        type="q2:CatalogueItemReferenceType" xmlns:q2="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="catalogueItemDates"
+                                        type="tns:CatalogueItemDatesType"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:simpleType name="RegistryCatalogueItemStateEnumerationType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="CANCELED"/>
+                    <xs:enumeration value="DISCONTINUED"/>
+                    <xs:enumeration value="IN_PROGRESS"/>
+                    <xs:enumeration value="REGISTERED"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:complexType name="CatalogueItemDatesType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="cancelDateTime"
+                                type="xs:dateTime"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="deletionDateTime"
+                                type="xs:dateTime"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="discontinuedDateTime"
+                                type="xs:dateTime"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="lastChangedDateTime"
+                                type="xs:dateTime"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="registrationDateTime"
+                                type="xs:dateTime"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified"
+                   targetNamespace="urn:gs1:gdsn:catalogue_item_hierarchical_withdrawal:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:catalogue_item_hierarchical_withdrawal:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:import namespace="urn:gs1:gdsn:catalogue_item_notification:xsd:3"/>
+            <xs:import namespace="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+            <xs:complexType name="CatalogueItemHierarchicalWithdrawalType">
+                <xs:complexContent mixed="false">
+                    <xs:extension base="q1:DocumentType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                        name="catalogueItemHierarchicalWithdrawalIdentification"
+                                        type="q1:EntityIdentificationType"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="cancelDateTime"
+                                        type="xs:dateTime"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="catalogueItemStateCode"
+                                        type="q2:CatalogueItemStateEnumerationType"
+                                        xmlns:q2="urn:gs1:gdsn:catalogue_item_notification:xsd:3"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="discontinueDateTime"
+                                        type="xs:dateTime"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                        name="hierarchyDeletionReasonCode" type="q3:HierarchyDeletionReasonCodeType"
+                                        xmlns:q3="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                        name="hierarchyDeletionAdditionalReasonDescription"
+                                        type="q1:Description200Type"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="catalogueItemReference"
+                                        type="q4:CatalogueItemReferenceType" xmlns:q4="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                            <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="dataRecipient"
+                                        type="q1:PartyIdentificationType"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="sourceDataPool"
+                                        type="q1:PartyIdentificationType"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:catalogue_item_notification:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:catalogue_item_notification:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:import namespace="urn:gs1:gdsn:trade_item:xsd:3"/>
+            <xs:simpleType name="CatalogueItemStateEnumerationType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="CANCELED"/>
+                    <xs:enumeration value="DISCONTINUED"/>
+                    <xs:enumeration value="IN_PROGRESS"/>
+                    <xs:enumeration value="REGISTERED"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:complexType name="CatalogueItemNotificationType">
+                <xs:complexContent mixed="false">
+                    <xs:extension base="q1:DocumentType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                        name="catalogueItemNotificationIdentification"
+                                        type="q1:EntityIdentificationType"/>
+                            <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="isReload"
+                                        type="xs:boolean"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="catalogueItem"
+                                        type="tns:CatalogueItemType"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="CatalogueItemType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="dataRecipient" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="sourceDataPool" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="catalogueItemState"
+                                type="tns:CatalogueItemStateType"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="tradeItem" type="q2:TradeItemType"
+                                xmlns:q2="urn:gs1:gdsn:trade_item:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="catalogueItemChildItemLink"
+                                type="tns:CatalogueItemChildItemLinkType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CatalogueItemStateType">
+                <xs:sequence>
+                    <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="catalogueItemStateCode"
+                                type="tns:CatalogueItemStateEnumerationType"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="cancelDateTime"
+                                type="xs:dateTime"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="discontinueDateTime"
+                                type="xs:dateTime"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CatalogueItemChildItemLinkType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="quantity"
+                                type="xs:nonNegativeInteger"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="catalogueItem"
+                                type="tns:CatalogueItemType"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:trade_item:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:trade_item:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:import namespace="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+            <xs:complexType name="TradeItemType">
+                <xs:complexContent mixed="false">
+                    <xs:extension base="q1:TradeItemIdentificationType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="contextIdentification"
+                                        type="q2:TradeItemContextCodeType" xmlns:q2="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="isTradeItemABaseUnit"
+                                        type="xs:boolean"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="isTradeItemAConsumerUnit"
+                                        type="xs:boolean"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="isTradeItemADespatchUnit"
+                                        type="xs:boolean"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="isTradeItemAnInvoiceUnit"
+                                        type="xs:boolean"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="isTradeItemAnOrderableUnit"
+                                        type="xs:boolean"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="isTradeItemAService"
+                                        type="xs:boolean"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="isTradeItemNonphysical"
+                                        type="xs:boolean"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="isTradeItemRecalled"
+                                        type="xs:boolean"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="preliminaryItemStatusCode"
+                                        type="q3:PreliminaryItemStatusCodeType"
+                                        xmlns:q3="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                        name="tradeItemUnitDescriptorCode" type="q4:TradeItemUnitDescriptorCodeType"
+                                        xmlns:q4="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                            <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified"
+                                        name="tradeItemTradeChannelCode" type="q5:TradeChannelCodeType"
+                                        xmlns:q5="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="brandOwner"
+                                        type="q6:PartyInRoleType" xmlns:q6="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                        name="informationProviderOfTradeItem" type="q7:PartyInRoleType"
+                                        xmlns:q7="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                            <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified"
+                                        name="manufacturerOfTradeItem" type="q8:PartyInRoleType"
+                                        xmlns:q8="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                            <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="partyInRole"
+                                        type="q9:PartyInRoleType" xmlns:q9="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="displayUnitInformation"
+                                        type="tns:DisplayUnitInformationType"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                        name="gdsnTradeItemClassification" type="tns:GDSNTradeItemClassificationType"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                        name="nextLowerLevelTradeItemInformation"
+                                        type="tns:NextLowerLevelTradeItemInformationType"/>
+                            <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified"
+                                        name="referencedTradeItem" type="tns:ReferencedTradeItemType"/>
+                            <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="targetMarket"
+                                        type="q1:TargetMarketType"/>
+                            <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified"
+                                        name="tradeItemContactInformation" type="tns:TradeItemContactInformationType"/>
+                            <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified"
+                                        name="tradeItemInformation" type="tns:TradeItemInformationType"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                        name="tradeItemSynchronisationDates"
+                                        type="tns:TradeItemSynchronisationDatesType"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="avpList"
+                                        type="q10:GS1_AttributeValuePairListType"
+                                        xmlns:q10="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="ReferencedTradeItemType">
+                <xs:complexContent mixed="false">
+                    <xs:extension base="q11:TradeItemIdentificationType" xmlns:q11="urn:gs1:shared:shared_common:xsd:3">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                        name="referencedTradeItemTypeCode" type="q12:ReferencedTradeItemTypeCodeType"
+                                        xmlns:q12="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="ChildTradeItemType">
+                <xs:complexContent mixed="false">
+                    <xs:extension base="q13:TradeItemIdentificationType" xmlns:q13="urn:gs1:shared:shared_common:xsd:3">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                        name="quantityOfNextLowerLevelTradeItem" type="xs:nonNegativeInteger"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="DisplayUnitInformationType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="displayTypeCode"
+                                type="q14:DisplayTypeCodeType" xmlns:q14="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="hasDisplayReadyPackaging"
+                                type="q15:NonBinaryLogicEnumerationType"
+                                xmlns:q15="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="isTradeItemADisplayUnit"
+                                type="q16:NonBinaryLogicEnumerationType"
+                                xmlns:q16="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="avpList"
+                                type="q17:GS1_AttributeValuePairListType" xmlns:q17="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="GDSNTradeItemClassificationType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="gpcCategoryCode" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="gpcCategoryDefinition"
+                                type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="gpcCategoryName" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified"
+                                name="gDSNTradeItemClassificationAttribute"
+                                type="tns:GDSNTradeItemClassificationAttributeType"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified"
+                                name="additionalTradeItemClassification"
+                                type="tns:AdditionalTradeItemClassificationType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="GDSNTradeItemClassificationAttributeType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="gpcAttributeTypeCode"
+                                type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="gpcAttributeValueCode"
+                                type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="gpcAttributeTypeDefinition"
+                                type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="gpcAttributeTypeName"
+                                type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="gpcAttributeValueName"
+                                type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="AdditionalTradeItemClassificationType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                name="additionalTradeItemClassificationSystemCode"
+                                type="q18:AdditionalTradeItemClassificationCodeListCodeType"
+                                xmlns:q18="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified"
+                                name="additionalTradeItemClassificationValue"
+                                type="tns:AdditionalTradeItemClassificationValueType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="AdditionalTradeItemClassificationValueType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                name="additionalTradeItemClassificationCodeValue" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                name="additionalTradeItemClassificationCodeDescription" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                name="additionalTradeItemClassificationVersion" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified"
+                                name="additionalTradeItemClassificationProperty"
+                                type="tns:AdditionalTradeItemClassificationPropertyType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="AdditionalTradeItemClassificationPropertyType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                name="additionalTradeItemClassificationPropertyCode" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                name="additionalTradeItemClassificationPropertyDescription"
+                                type="q19:Description1000Type" xmlns:q19="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="propertyAmount"
+                                type="q20:AmountType" xmlns:q20="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="propertyCode" type="q21:CodeType"
+                                xmlns:q21="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="propertyDateTime"
+                                type="xs:dateTime"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="propertyDescription"
+                                type="q22:Description5000Type" xmlns:q22="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="propertyFloat" type="xs:float"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="propertyInteger"
+                                type="xs:integer"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="propertyMeasurement"
+                                type="q23:MeasurementType" xmlns:q23="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="propertyString" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="NextLowerLevelTradeItemInformationType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="quantityOfChildren"
+                                type="xs:nonNegativeInteger"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                name="totalQuantityOfNextLowerLevelTradeItem" type="xs:nonNegativeInteger"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="childTradeItem"
+                                type="tns:ChildTradeItemType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="TradeItemContactInformationType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="contactTypeCode"
+                                type="q24:ContactTypeCodeType" xmlns:q24="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified"
+                                name="additionalPartyIdentification" type="q25:AdditionalPartyIdentificationType"
+                                xmlns:q25="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="availableTime"
+                                type="q26:Description70Type" xmlns:q26="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="contactAddress" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="contactDescription"
+                                type="q27:Description200Type" xmlns:q27="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="contactName" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="gln" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified"
+                                name="targetMarketCommunicationChannel"
+                                type="tns:TargetMarketCommunicationChannelType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="TargetMarketCommunicationChannelType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="targetMarket"
+                                type="q28:TargetMarketType" xmlns:q28="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="communicationChannel"
+                                type="q29:CommunicationChannelType" xmlns:q29="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="TradeItemInformationType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="productionVariantDescription"
+                                type="q30:Description70Type" xmlns:q30="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="productionVariantEffectiveDateTime"
+                                type="xs:dateTime"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="tradeItemComponents"
+                                type="tns:TradeItemComponentsType"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="extension" type="q31:ExtensionType"
+                                xmlns:q31="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="avpList"
+                                type="q32:GS1_AttributeValuePairListType" xmlns:q32="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="TradeItemComponentsType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="contentsDescription"
+                                type="q33:Description70Type" xmlns:q33="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="nonMarkedTradeItemComponents"
+                                type="q34:Description70Type" xmlns:q34="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="numberOfPiecesInSet"
+                                type="xs:nonNegativeInteger"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="totalNumberOfComponents"
+                                type="xs:nonNegativeInteger"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="componentInformation"
+                                type="tns:ComponentInformationType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ComponentInformationType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="componentNumber"
+                                type="xs:nonNegativeInteger"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="componentDescription"
+                                type="q35:Description1000Type" xmlns:q35="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="componentIdentification"
+                                type="q36:IdentifierType" xmlns:q36="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="contextIdentification"
+                                type="q37:TradeItemContextCodeType" xmlns:q37="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="gpcCategoryCode" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="extension" type="q38:ExtensionType"
+                                xmlns:q38="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="avpList"
+                                type="q39:GS1_AttributeValuePairListType" xmlns:q39="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="TradeItemSynchronisationDatesType">
+                <xs:sequence>
+                    <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="lastChangeDateTime"
+                                type="xs:dateTime"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="cancelledDateTime"
+                                type="xs:dateTime"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="communityVisibilityDateTime"
+                                type="xs:dateTime"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="discontinuedDateTime"
+                                type="xs:dateTime"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="effectiveDateTime"
+                                type="xs:dateTime"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="publicationDateTime"
+                                type="xs:dateTime"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:catalogue_item_publication:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:catalogue_item_publication:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:import namespace="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+            <xs:complexType name="CatalogueItemPublicationType">
+                <xs:complexContent mixed="false">
+                    <xs:extension base="q1:DocumentType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                        name="catalogueItemPublicationIdentification"
+                                        type="q1:EntityIdentificationType"/>
+                            <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified"
+                                        name="businessContextIdentification" type="q2:TradeItemContextCodeType"
+                                        xmlns:q2="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                            <xs:choice minOccurs="1" maxOccurs="1">
+                                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="publishToGLN"
+                                            type="xs:string"/>
+                                <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="publishToTargetMarket"
+                                            type="q1:TargetMarketType"/>
+                            </xs:choice>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="catalogueItemReference"
+                                        type="q3:CatalogueItemReferenceType" xmlns:q3="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:catalogue_item_subscription:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:catalogue_item_subscription:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="CatalogueItemSubscriptionType">
+                <xs:complexContent mixed="false">
+                    <xs:extension base="q1:DocumentType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                        name="catalogueItemSubscriptionIdentification"
+                                        type="q1:EntityIdentificationType"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="dataRecipient"
+                                        type="xs:string"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="dataSource"
+                                        type="xs:string"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="gpcCategoryCode"
+                                        type="xs:string"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="gtin" type="xs:string"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="recipientDataPool"
+                                        type="xs:string"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="targetMarket"
+                                        type="q1:TargetMarketType"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified"
+                   targetNamespace="urn:gs1:gdsn:request_for_catalogue_item_notification:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:request_for_catalogue_item_notification:xsd:3">
+            <xs:import namespace="urn:gs1:gdsn:catalogue_item_subscription:xsd:3"/>
+            <xs:import namespace="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+            <xs:complexType name="RequestForCatalogueItemNotificationType">
+                <xs:complexContent mixed="false">
+                    <xs:extension base="q1:CatalogueItemSubscriptionType"
+                                  xmlns:q1="urn:gs1:gdsn:catalogue_item_subscription:xsd:3">
+                        <xs:sequence>
+                            <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="isReload"
+                                        type="xs:boolean"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="isReloadReasonCode"
+                                        type="q2:IsReloadReasonCodeType" xmlns:q2="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:party_registration_response:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:party_registration_response:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:complexType name="PartyRegistrationResponseType">
+                <xs:complexContent mixed="false">
+                    <xs:extension base="q1:DocumentType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                        name="partyRegistrationResponseIdentification"
+                                        type="q1:EntityIdentificationType"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="partyReference"
+                                        type="xs:string"/>
+                            <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="responseStatusCode"
+                                        type="q1:ResponseStatusEnumerationType"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                        name="partyRegistrationInformation"
+                                        type="tns:PartyRegistrationInformationType"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="PartyRegistrationInformationType">
+                <xs:sequence>
+                    <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="lastChangeDate"
+                                type="xs:dateTime"/>
+                    <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="registrationDate"
+                                type="xs:dateTime"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="removedDate" type="xs:dateTime"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified"
+                   targetNamespace="urn:gs1:gdsn:catalogue_item_registration_response:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="urn:gs1:gdsn:catalogue_item_registration_response:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:import namespace="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+            <xs:complexType name="CatalogueItemRegistrationResponseType">
+                <xs:complexContent mixed="false">
+                    <xs:extension base="q1:DocumentType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+                                        name="catalogueItemRegistrationResponseIdentification"
+                                        type="q1:EntityIdentificationType"/>
+                            <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="lastChangedDateTime"
+                                        type="xs:dateTime"/>
+                            <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="registrationDateTime"
+                                        type="xs:dateTime"/>
+                            <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="responseStatus"
+                                        type="q1:ResponseStatusEnumerationType"/>
+                            <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="catalogueItemReference"
+                                        type="q2:CatalogueItemReferenceType" xmlns:q2="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:gs1:gdsn:gs1_response:xsd:3"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:gs1:gdsn:gs1_response:xsd:3">
+            <xs:import namespace="urn:gs1:shared:shared_common:xsd:3"/>
+            <xs:import namespace="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+            <xs:complexType name="GS1ResponseType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="originatingMessageIdentifier"
+                                type="q1:EntityIdentificationType" xmlns:q1="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="receiver" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="sender" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="transactionResponse"
+                                type="tns:TransactionResponseType"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="gS1Exception"
+                                type="tns:GS1ExceptionType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="TransactionResponseType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="transactionIdentifier"
+                                type="q2:EntityIdentificationType" xmlns:q2="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="responseStatusCode"
+                                type="q3:ResponseStatusEnumerationType" xmlns:q3="urn:gs1:shared:shared_common:xsd:3"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="GS1ExceptionType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="exceptionMessageTypeCode"
+                                type="q4:ExceptionMessageTypeCodeType" xmlns:q4="urn:gs1:gdsn:gdsn_common:xsd:3"/>
+                    <xs:choice minOccurs="1" maxOccurs="1">
+                        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="transactionException"
+                                    type="tns:TransactionExceptionType"/>
+                        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="messageException"
+                                    type="tns:MessageExceptionType"/>
+                    </xs:choice>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="TransactionExceptionType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="entityIdentification"
+                                type="q5:EntityIdentificationType" xmlns:q5="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="gS1Error"
+                                type="tns:GS1ErrorType"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="commandException"
+                                type="tns:CommandExceptionType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="GS1ErrorType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="errorCode" type="xs:string"/>
+                    <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="errorDateTime" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="errorDescription"
+                                type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CommandExceptionType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="entityIdentification"
+                                type="q6:EntityIdentificationType" xmlns:q6="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="gS1Error"
+                                type="tns:GS1ErrorType"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="documentException"
+                                type="tns:DocumentExceptionType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="DocumentExceptionType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="entityIdentification"
+                                type="q7:EntityIdentificationType" xmlns:q7="urn:gs1:shared:shared_common:xsd:3"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="gS1Error"
+                                type="tns:GS1ErrorType"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="attributeException"
+                                type="tns:AttributeExceptionType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="AttributeExceptionType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="attributeName" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="attributeValue" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="xPath" type="xs:string"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="gS1Error"
+                                type="tns:GS1ErrorType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="MessageExceptionType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="gS1Error"
+                                type="tns:GS1ErrorType"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="DataSourceOperationsCallbackService_ReceiveCatalogueItemConfirmation_InputMessage">
+        <wsdl:part name="parameters" element="tns:ReceiveCatalogueItemConfirmation"/>
+    </wsdl:message>
+    <wsdl:message name="DataSourceOperationsCallbackService_ReceiveCatalogueItemConfirmation_OutputMessage">
+        <wsdl:part name="parameters" element="tns:ReceiveCatalogueItemConfirmationResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="DataSourceOperationsCallbackService">
+        <wsdl:operation name="ReceiveCatalogueItemConfirmation">
+            <wsdl:input
+                    wsaw:Action="http://services.gs1tradesync.com/2016/05/06/DataSourceOperationsCallbackService/ReceiveCatalogueItemConfirmation"
+                    message="tns:DataSourceOperationsCallbackService_ReceiveCatalogueItemConfirmation_InputMessage"/>
+            <wsdl:output
+                    wsaw:Action="http://services.gs1tradesync.com/2016/05/06/DataSourceOperationsCallbackService/ReceiveCatalogueItemConfirmationResponse"
+                    message="tns:DataSourceOperationsCallbackService_ReceiveCatalogueItemConfirmation_OutputMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="wsHttpEndpoint" type="tns:DataSourceOperationsCallbackService">
+        <wsp:PolicyReference URI="#wsHttpEndpoint_policy"/>
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="ReceiveCatalogueItemConfirmation">
+            <soap12:operation
+                    soapAction="http://services.gs1tradesync.com/2016/05/06/DataSourceOperationsCallbackService/ReceiveCatalogueItemConfirmation"
+                    style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="DataSourceOperationsCallbackService">
+        <wsdl:port name="wsHttpEndpoint" binding="tns:wsHttpEndpoint">
+            <soap12:address
+                    location="https://gs1tradesync-uat.pro-sharp.hu:5556/DataSourceOperationsCallbackService.svc"/>
+            <wsa10:EndpointReference>
+                <wsa10:Address>https://gs1tradesync-uat.pro-sharp.hu:5556/DataSourceOperationsCallbackService.svc
+                </wsa10:Address>
+            </wsa10:EndpointReference>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
