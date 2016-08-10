@@ -3,16 +3,18 @@ service =
   DataRecipientOperationsCallbackService:
     wsHttpEndpoint:
       ReceiveCatalogueItemNotification: (args) ->
-        console.log("notification")
-        console.log(JSON.stringify(args, null, 2))
+        logger = Winston
+        logger.info 'ReceiveCatalogueItemNotification', {args}
         #determine correct output
         args
       ReceiveCatalogueItemHierarchicalWithdrawal: (args) ->
-        console.log("withdrawal")
-        console.log(JSON.stringify(args, null, 2))
+        logger = Winston
+        logger.info 'ReceiveCatalogueItemHierarchicalWithdrawal', {args}
         #determine correct output
         args
 
 Meteor.startup () ->
   wsdl = Assets.getText 'wsdl/DataRecipientOperationsCallbackService.Single.wsdl'
   Soap.listen "/soapRC", service, wsdl
+  logger = Winston
+  logger.info 'DataRecipientOperationsCallbackService listener started'

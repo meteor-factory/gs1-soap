@@ -1,2 +1,3 @@
 if Meteor.isServer
-  console.log "server started", new Date()
+  logger = Winston;
+  logger.info('server started, log with winston', new Date())

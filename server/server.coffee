@@ -16,13 +16,15 @@ Meteor.startup () ->
 
 Meteor.methods(
   'callHello': (msg) ->
+    logger = Winston
     try
       client = Soap.createClient 'http://localhost:8000/wsdl?wsdl'
       result = client.sayHello
         firstName: msg || 'test'
-      console.log "result", result
+      logger.info "call hello", {msg, result}
       return result.sender + " - " + result.timestamp
     catch err
+      logger.error 'call hello failed', {err, msg}
       if err.error is 'soap-creation'
         console.log 'SOAP client creation failed', err
       else if err.error is 'soap-method'

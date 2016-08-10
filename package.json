@@ -7,6 +7,7 @@
   "dependencies": {
     "http": "0.0.0",
     "meteor-node-stubs": "~0.2.0",
-    "soap": "^0.16.0"
+    "soap": "^0.16.0",
+    "winston": "^2.2.0 "
   }
 }
