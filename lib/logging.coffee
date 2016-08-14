@@ -21,7 +21,8 @@ if Meteor.isServer
       auth: 'red'
     host: 'logs4.papertrailapp.com'
     port: 34781
-    logFormat: (level, message) -> "[#{level}] #{message}"
+    logFormat: (level, message) ->
+      "[#{level}] #{message}"
     inlineMeta: true
 
   logger.exitOnError = false
