@@ -10,9 +10,6 @@
     catalogItemSubscription: "catalogItemSubscription"
     requestForCatalogItemNotification: "requestForCatalogItemNotification"
     catalogItemConfirmation: "catalogItemConfirmation"
-  wsdl_options:
-    cert: 'foo',
-    key: 'bar'
   getHeader: (type, multiple = false) ->
     HeaderVersion: "1.0"
     Sender:
