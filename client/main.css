@@ -1,1 +1,18 @@
 /* CSS declarations go here */
+body {
+    background-color: lightgray;
+}
+
+section h1, section h2, section h3 {
+    margin-top: 0px;
+}
+.bordered {
+    border: 1px solid black;
+    padding: 10px;
+    background-color: darkkhaki;
+    border-radius: 5px;
+}
+
+.bordered + .bordered {
+    margin-top: 10px;
+}

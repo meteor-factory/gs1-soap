@@ -1,0 +1,7 @@
+{
+  "wsdlPath": "wsdl/local/",
+  "endpoints": {
+    "dataRecipient": "http://localhost:8000/dr",
+    "dataSource": "http://localhost:8000/ds"
+  }
+}

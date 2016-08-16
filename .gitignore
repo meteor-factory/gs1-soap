@@ -86,5 +86,4 @@ $RECYCLE.BIN/
 
 
 node_modules/
-
-.idea/
+private/cert/

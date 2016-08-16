@@ -16,7 +16,6 @@ Meteor.startup () ->
 
 Meteor.methods(
   'callHello': (msg) ->
-    logger = Winston
     try
       client = Soap.createClient 'http://localhost:8000/wsdl?wsdl'
       result = client.sayHello
@@ -32,6 +31,4 @@ Meteor.methods(
       else
         console.log 'SOAP unexpected error', err
       throw err
-
-    debugger
 )
