@@ -1,10 +1,26 @@
 
+listeners = [];
+
+@DR =
+  addListener : (callback) ->
+    listeners.push callback
+  clearListeners : () ->
+    listeners = []
+  removeListener : (callback) ->
+    index = listeners.indexOf(callback)
+    if index >= 0
+      listeners.splice index, 1
+  emit : (args) ->
+    console.log 'emitter called'
+    listeners.forEach (listener) -> listener(args)
+
 service =
   DataRecipientOperationsCallbackService:
     wsHttpEndpoint:
       ReceiveCatalogueItemNotification: (args) ->
         logger.info 'ReceiveCatalogueItemNotification', {args}
         #determine correct output
+        @DR.emit(args)
         args
       ReceiveCatalogueItemHierarchicalWithdrawal: (args) ->
         logger.info 'ReceiveCatalogueItemHierarchicalWithdrawal', {args}
@@ -31,7 +47,6 @@ Meteor.methods(
   'addSubscription': (gln, gtin) ->
     try
       client = getClient()
-
       request =
         catalogueItemSubscriptionType:
           creationDateTime: new Date()
