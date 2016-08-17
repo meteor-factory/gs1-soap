@@ -1,7 +1,7 @@
 
 listeners = [];
 
-@DR =
+@DRC =
   addListener : (callback) ->
     listeners.push callback
   clearListeners : () ->
