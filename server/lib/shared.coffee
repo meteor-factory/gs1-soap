@@ -7,9 +7,13 @@
     fooducer: 5790002328275
     GS1: 5790000000029
   messageTypes:
-    catalogItemSubscription: "catalogItemSubscription"
-    requestForCatalogItemNotification: "requestForCatalogItemNotification"
-    catalogItemConfirmation: "catalogItemConfirmation"
+    catalogueItemNotification: "catalogueItemNotification"
+    catalogueItemHierarchicalWithdrawal: "catalogueItemHierarchicalWithdrawal"
+    catalogueItemConfirmation: "CatalogueItemConfirmation"
+    catalogueItemSubscription: "CatalogueItemSubscription"
+    requestForCatalogueItemNotification: "RequestForCatalogueItemNotification"
+  getPropSafe: (obj, props...) ->
+    props.reduce ((o, prop) -> if o and o.hasOwnProperty prop then o[prop]), obj
   getHeader: (type, multiple = false) ->
     HeaderVersion: "1.0"
     Sender:
