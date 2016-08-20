@@ -4,45 +4,18 @@
 
 <body>
   <h1>GS1 playground</h1>
-  {{> wsdl}}
-  <hr />
   {{> hello}}
 </body>
 
 <template name="hello">
-    <h2>Hello, world!</h2>
-    <button class="click">Click Me</button>
-    <p>You've pressed the button {{counter}} times.</p>
-    <form class="echo">
-        <input type="text" name="input" value="init" />
-        <input type="text" name="output" disabled />
-        <button type="submit">Echo!</button>
-    </form>
-</template>
-
-<template name="wsdl">
     <section class="bordered">
-        <h3>Test</h3>
-        <button id="test">Call WSDL</button>
-    </section>
-    <section class="bordered">
-        <form id="addSub">
-            <h3>Add subscription</h3>
-            <label>
-                GLN
-                <input type="text" id="addSubGLN" name="gln" />
-            </label>
-            <label>
-                GTIN
-                <input type="text" id="addSubGtin" name="gtin" />
-            </label>
-            <button id="addSubBtn">Call WSDL</button>
-            <h4>Result:</h4>
-            <textarea id="addSubResult" name="result" rows="10" cols="80" readonly></textarea>
+        <h2>Hello, world!</h2>
+        <button class="click">Click Me</button>
+        <p>You've pressed the button {{counter}} times.</p>
+        <form class="echo">
+            <input type="text" name="input" value="0" />
+            <input type="text" name="output" disabled />
+            <button type="submit">Echo!</button>
         </form>
-    </section>
-    <section class="bordered">
-        <h3>Output</h3>
-        <p>{{text}}</p>
     </section>
 </template>

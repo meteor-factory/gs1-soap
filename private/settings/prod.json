@@ -1,5 +1,5 @@
 {
-  "wsdlPath": "wsdl/",
+  "wsdlPath": "wsdl/prod/",
   "endpoints": {
     "dataRecipient": "https://gs1tradesync-uat.pro-sharp.hu:5556/DataRecipientOperationsService.svc",
     "dataSource": "https://gs1tradesync-uat.pro-sharp.hu:5556/DataSourceOperationsService.svc"

@@ -12,23 +12,6 @@ Template.hello.events
     event.preventDefault()
     Meteor.call 'echo', event.target.input.value, (error, result) ->
       event.target.output.value = error || result
-
-Template.wsdl.onCreated ->
-  @text = new ReactiveVar('init')
-
-Template.wsdl.helpers
-  text: ->
-    Template.instance().text.get()
-
-Template.wsdl.events
-  'click button#test': (event, instance) ->
-    Meteor.call 'callHello', (error, result) ->
-      console.log 'resp', error, result
-      if not error
-       instance.text.set result || "test"
-  'submit #addSub': (event, instance) ->
-    event.preventDefault()
-    gln = event.target.gln.value
-    gtin = event.target.gtin.value
-    Meteor.call 'addSubscription', gln, gtin, (error, result) ->
-      event.target.result.value = error || JSON.stringify(result, null, 2)
+      val = parseInt event.target.input.value
+      if val >= 0
+        event.target.input.value = val + 1
