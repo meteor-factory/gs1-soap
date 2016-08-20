@@ -17,16 +17,19 @@ listeners = [];
 service =
   DataRecipientOperationsCallbackService:
     wsHttpEndpoint:
-      ReceiveCatalogueItemNotification:   (args) ->
+      ReceiveCatalogueItemNotification: (args) ->
         logger.info 'ReceiveCatalogueItemNotification', {args}
         #determine correct output
         @DRC.emit(args)
-        response = @GS1.getResponse @GS1.responseCodes.ACCEPTED
+        response =
+          ReceiveCatalogueItemNotificationResult: @GS1.getResponse @GS1.responseCodes.ACCEPTED
         response
       ReceiveCatalogueItemHierarchicalWithdrawal: (args) ->
         logger.info 'ReceiveCatalogueItemHierarchicalWithdrawal', {args}
         #determine correct output
-        @GS1.getResponse @GS1.responseCodes.ACCEPTED
+        response =
+          ReceiveCatalogueItemHierarchicalWithdrawalResult: @GS1.getResponse @GS1.responseCodes.ACCEPTED
+        response
 
 Meteor.startup () ->
   wsdl = Assets.getText Meteor.settings.wsdlPath + 'DataRecipientOperationsCallbackService.Single.wsdl'
