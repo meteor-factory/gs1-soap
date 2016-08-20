@@ -21,7 +21,8 @@ service =
         logger.info 'ReceiveCatalogueItemNotification', {args}
         #determine correct output
         @DRC.emit(args)
-        @GS1.getResponse @GS1.responseCodes.ACCEPTED
+        response = @GS1.getResponse @GS1.responseCodes.ACCEPTED
+        response
       ReceiveCatalogueItemHierarchicalWithdrawal: (args) ->
         logger.info 'ReceiveCatalogueItemHierarchicalWithdrawal', {args}
         #determine correct output
