@@ -39,9 +39,14 @@
       MulpleType: multiple
       CreationDateAndTime: new Date()
   getResponse: (responseCode = @responseCode.ACCEPTED) ->
-    receiver: @gln.fooducer
-    sender: @gln.GS1
+    receiver:
+      attributes:
+        xmlns: ""
+      $value: @gln.fooducer
+    sender:
+      attributes:
+        xmlns: ""
+      $value: @gln.GS1
     transactionResponse: [
       responseStatusCode: responseCode
     ]
-
