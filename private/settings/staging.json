@@ -1,7 +1,7 @@
 {
   "wsdlPath": "wsdl/stage/",
   "endpoints": {
-    "dataRecipient": "http://ec2-52-58-65-75.eu-central-1.compute.amazonaws.com/DataRecepient.svc",
-    "dataSource": "http://ec2-52-58-65-75.eu-central-1.compute.amazonaws.com/DataSource.svc"
+    "dataRecipient": "https://ec2-52-58-65-75.eu-central-1.compute.amazonaws.com/DataRecepient.svc",
+    "dataSource": "https://ec2-52-58-65-75.eu-central-1.compute.amazonaws.com/DataSource.svc"
   }
 }
