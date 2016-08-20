@@ -12,6 +12,11 @@
     catalogueItemConfirmation: "CatalogueItemConfirmation"
     catalogueItemSubscription: "CatalogueItemSubscription"
     requestForCatalogueItemNotification: "RequestForCatalogueItemNotification"
+  responseCodes:
+    ACCEPTED: "ACCEPTED"
+    MODIFIED: "MODIFIED"
+    NO_ACTION: "NO_ACTION"
+    REJECTED: "REJECTED"
   getPropSafe: (obj, props...) ->
     props.reduce ((o, prop) -> if o and o.hasOwnProperty prop then o[prop]), obj
   getHeader: (type, multiple = false) ->
@@ -33,3 +38,10 @@
       Type: type
       MulpleType: multiple
       CreationDateAndTime: new Date()
+  getResponse: (responseCode = @responseCode.ACCEPTED) ->
+    receiver: @gln.fooducer
+    sender: @gln.GS1
+    transactionResponse: [
+      responseStatusCode: responseCode
+    ]
+

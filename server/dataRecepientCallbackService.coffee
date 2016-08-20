@@ -21,11 +21,11 @@ service =
         logger.info 'ReceiveCatalogueItemNotification', {args}
         #determine correct output
         @DRC.emit(args)
-        args
+        @GS1.getResponse @GS1.responseCodes.ACCEPTED
       ReceiveCatalogueItemHierarchicalWithdrawal: (args) ->
         logger.info 'ReceiveCatalogueItemHierarchicalWithdrawal', {args}
         #determine correct output
-        args
+        @GS1.getResponse @GS1.responseCodes.ACCEPTED
 
 Meteor.startup () ->
   wsdl = Assets.getText Meteor.settings.wsdlPath + 'DataRecipientOperationsCallbackService.Single.wsdl'

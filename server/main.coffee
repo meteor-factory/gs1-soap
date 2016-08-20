@@ -3,5 +3,6 @@ if Meteor.isServer
 
 Meteor.methods({
   'echo': (msg) ->
+    console.log 'echo', msg
     msg
 })

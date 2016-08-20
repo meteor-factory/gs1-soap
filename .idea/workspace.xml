@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="46eb6f0e-4ffa-4984-90c7-807a39febd81" name="Default" comment="added wsdls&#10;added services to seperate files">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/private/wsdl/stage/DataRecipientOperationsCallbackService.Single.wsdl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/private/wsdl/stage/DataRecipientOperationsService.Single.wsdl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/private/wsdl/stage/DataSourceOperationsCallbackService.Single.wsdl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/private/wsdl/stage/DataSourceOperationsService.Single.wsdl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/run.sh" />
+    <list default="true" id="46eb6f0e-4ffa-4984-90c7-807a39febd81" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/private/settings/staging.json" afterPath="$PROJECT_DIR$/private/settings/staging.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/dataRecepientCallbackService.coffee" afterPath="$PROJECT_DIR$/server/dataRecepientCallbackService.coffee" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/dataSourceCallbackService.coffee" afterPath="$PROJECT_DIR$/server/dataSourceCallbackService.coffee" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/lib/shared.coffee" afterPath="$PROJECT_DIR$/server/lib/shared.coffee" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/main.coffee" afterPath="$PROJECT_DIR$/server/main.coffee" />
     </list>
     <ignored path="gs1-soap.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,28 +30,28 @@
       <file leaf-file-name="dataRecepientCallbackService.coffee" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/dataRecepientCallbackService.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="627">
-              <caret line="19" column="40" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
+            <state relative-caret-position="825">
+              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="server.coffee" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/server.coffee">
+      <file leaf-file-name="dataSourceCallbackService.coffee" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/dataSourceCallbackService.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="494">
-              <caret line="19" column="66" selection-start-line="19" selection-start-column="66" selection-end-line="19" selection-end-column="66" />
+            <state relative-caret-position="792">
+              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.coffee" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.coffee" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server/main.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="4" column="10" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
+            <state relative-caret-position="165">
+              <caret line="5" column="27" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -79,7 +77,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="staging.json" pinned="false" current-in-tab="true">
+      <file leaf-file-name="shared.coffee" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/lib/shared.coffee">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="789">
+              <caret line="44" column="38" selection-start-line="44" selection-start-column="38" selection-end-line="44" selection-end-column="38" />
+              <folding>
+                <element signature="e#821#1267#2" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="staging.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/private/settings/staging.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="198">
@@ -119,16 +129,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dataSourceService.coffee" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/dataSourceService.coffee">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -158,7 +158,6 @@
         <option value="$PROJECT_DIR$/client/main.css" />
         <option value="$PROJECT_DIR$/lib/logging.coffee" />
         <option value="$PROJECT_DIR$/server/server.coffee" />
-        <option value="$PROJECT_DIR$/server/main.coffee" />
         <option value="$PROJECT_DIR$/client/main.coffee" />
         <option value="$PROJECT_DIR$/client/main.html" />
         <option value="$PROJECT_DIR$/private/wsdl/local/DataSourceOperationsCallbackService.Single.wsdl" />
@@ -167,14 +166,15 @@
         <option value="$PROJECT_DIR$/private/settings/test.json" />
         <option value="$PROJECT_DIR$/private/settings/prod.json" />
         <option value="$PROJECT_DIR$/.meteor/local/build/programs/server/app/app.js" />
-        <option value="$PROJECT_DIR$/server/dataSourceCallbackService.coffee" />
         <option value="$PROJECT_DIR$/server/dataRecepientService.coffee" />
         <option value="$PROJECT_DIR$/server/API.coffee" />
-        <option value="$PROJECT_DIR$/server/lib/shared.coffee" />
         <option value="$PROJECT_DIR$/server/dataSourceService.coffee" />
-        <option value="$PROJECT_DIR$/server/dataRecepientCallbackService.coffee" />
         <option value="$PROJECT_DIR$/run.sh" />
         <option value="$PROJECT_DIR$/private/settings/staging.json" />
+        <option value="$PROJECT_DIR$/server/lib/shared.coffee" />
+        <option value="$PROJECT_DIR$/server/dataRecepientCallbackService.coffee" />
+        <option value="$PROJECT_DIR$/server/dataSourceCallbackService.coffee" />
+        <option value="$PROJECT_DIR$/server/main.coffee" />
       </list>
     </option>
   </component>
@@ -245,7 +245,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="private" />
+              <option name="myItemId" value="server" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -259,33 +259,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="private" />
+              <option name="myItemId" value="server" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="wsdl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gs1-soap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gs1-soap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="private" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wsdl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="stage" />
+              <option name="myItemId" value="lib" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -440,7 +418,7 @@
       <workItem from="1471179168143" duration="43973000" />
       <workItem from="1471415815962" duration="12618000" />
       <workItem from="1471603390328" duration="708000" />
-      <workItem from="1471608799139" duration="3563000" />
+      <workItem from="1471608799139" duration="5516000" />
     </task>
     <task id="LOCAL-00001" summary="soap client test">
       <created>1468863336321</created>
@@ -463,11 +441,18 @@
       <option name="project" value="LOCAL" />
       <updated>1471652948012</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="staging settings">
+      <created>1471654633278</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1471654633278</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="120533000" />
+    <option name="totallyTimeSpent" value="122486000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -517,7 +502,8 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <MESSAGE value="soap client test" />
     <MESSAGE value="added wsdls&#10;added services to seperate files" />
-    <option name="LAST_COMMIT_MESSAGE" value="added wsdls&#10;added services to seperate files" />
+    <MESSAGE value="staging settings" />
+    <option name="LAST_COMMIT_MESSAGE" value="staging settings" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -533,14 +519,8 @@
           <properties />
           <option name="timeStamp" value="74" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/server/main.coffee</url>
-          <line>5</line>
-          <properties />
-          <option name="timeStamp" value="75" />
-        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="76" />
+      <option name="time" value="77" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="meteor-app-runner">
@@ -562,9 +542,9 @@
         <state relative-caret-position="1518">
           <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
           <folding>
-            <marker date="1471654592259" expanded="true" signature="18885:19670" ph="{...}" />
-            <marker date="1471654592259" expanded="true" signature="19028:19670" ph="{...}" />
-            <marker date="1471654592259" expanded="true" signature="19118:19670" ph="{...}" />
+            <marker date="1471657236437" expanded="true" signature="18996:19781" ph="{...}" />
+            <marker date="1471657236437" expanded="true" signature="19139:19781" ph="{...}" />
+            <marker date="1471657236437" expanded="true" signature="19229:19781" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -606,9 +586,9 @@
         <state relative-caret-position="1518">
           <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
           <folding>
-            <marker date="1471654592259" expanded="true" signature="18885:19670" ph="{...}" />
-            <marker date="1471654592259" expanded="true" signature="19028:19670" ph="{...}" />
-            <marker date="1471654592259" expanded="true" signature="19118:19670" ph="{...}" />
+            <marker date="1471657236437" expanded="true" signature="18996:19781" ph="{...}" />
+            <marker date="1471657236437" expanded="true" signature="19139:19781" ph="{...}" />
+            <marker date="1471657236437" expanded="true" signature="19229:19781" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -762,9 +742,9 @@
         <state relative-caret-position="12111">
           <caret line="367" column="21" selection-start-line="367" selection-start-column="21" selection-end-line="367" selection-end-column="21" />
           <folding>
-            <marker date="1471654592259" expanded="true" signature="18885:19670" ph="{...}" />
-            <marker date="1471654592259" expanded="true" signature="19028:19670" ph="{...}" />
-            <marker date="1471654592259" expanded="true" signature="19118:19670" ph="{...}" />
+            <marker date="1471657236437" expanded="true" signature="18996:19781" ph="{...}" />
+            <marker date="1471657236437" expanded="true" signature="19139:19781" ph="{...}" />
+            <marker date="1471657236437" expanded="true" signature="19229:19781" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -777,26 +757,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/lib/shared.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="11" column="58" selection-start-line="11" selection-start-column="58" selection-end-line="11" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/dataRecepientService.coffee">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
           <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/dataSourceCallbackService.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="8" column="32" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
           <folding />
         </state>
       </provider>
@@ -809,26 +773,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/dataRecepientCallbackService.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="627">
-          <caret line="19" column="40" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/server.coffee">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="494">
           <caret line="19" column="66" selection-start-line="19" selection-start-column="66" selection-end-line="19" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/main.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="4" column="10" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
           <folding />
         </state>
       </provider>
@@ -877,6 +825,40 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/lib/shared.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="789">
+          <caret line="44" column="38" selection-start-line="44" selection-start-column="38" selection-end-line="44" selection-end-column="38" />
+          <folding>
+            <element signature="e#821#1267#2" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/dataRecepientCallbackService.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="825">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/dataSourceCallbackService.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="792">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/main.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="5" column="27" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
           <folding />
         </state>
       </provider>
