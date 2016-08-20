@@ -17,10 +17,10 @@ listeners = [];
 service =
   DataRecipientOperationsCallbackService:
     wsHttpEndpoint:
-      ReceiveCatalogueItemNotification: (args) ->
+      ReceiveCatalogueItemNotification:   (args) ->
         logger.info 'ReceiveCatalogueItemNotification', {args}
         #determine correct output
-        @DR.emit(args)
+        @DRC.emit(args)
         args
       ReceiveCatalogueItemHierarchicalWithdrawal: (args) ->
         logger.info 'ReceiveCatalogueItemHierarchicalWithdrawal', {args}
