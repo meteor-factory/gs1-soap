@@ -21,7 +21,9 @@ service =
       ReceiveCatalogueItemConfirmation: (args) ->
         logger.info 'ReceiveCatalogueItemConfirmation', {args}
         @DSC.emit(args)
-        @GS1.getResponse @GS1.responseCodes.ACCEPTED
+        response =
+          ReceiveCatalogueItemConfirmationResult: @GS1.getResponse @GS1.responseCodes.ACCEPTED
+        response
 
 Meteor.startup () ->
   wsdl = Assets.getText Meteor.settings.wsdlPath + 'DataSourceOperationsCallbackService.Single.wsdl'
