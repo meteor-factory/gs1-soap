@@ -47,6 +47,8 @@
       attributes:
         xmlns: ""
       $value: @gln.GS1
-    transactionResponse: [
-      responseStatusCode: responseCode
-    ]
+    transactionResponse:
+      attributes:
+        xmlns: ""
+      $value:
+        responseStatusCode: responseCode
