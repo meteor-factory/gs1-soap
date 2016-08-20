@@ -1,7 +1,7 @@
 {
-  "wsdlPath": "wsdl/staging/",
+  "wsdlPath": "wsdl/stage/",
   "endpoints": {
-    "dataRecipient": "https://gs1tradesync-uat.pro-sharp.hu:5556/DataRecipientOperationsService.svc",
-    "dataSource": "https://gs1tradesync-uat.pro-sharp.hu:5556/DataSourceOperationsService.svc"
+    "dataRecipient": "http://ec2-52-58-65-75.eu-central-1.compute.amazonaws.com/DataRecepient.svc",
+    "dataSource": "http://ec2-52-58-65-75.eu-central-1.compute.amazonaws.com/DataSource.svc"
   }
 }

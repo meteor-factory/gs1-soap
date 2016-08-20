@@ -1,0 +1,1 @@
+meteor --settings private/settings/staging.json
