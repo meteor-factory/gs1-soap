@@ -1,5 +1,6 @@
 {
   "logItems": true,
+  "logItemsPath": "~/logs/gs1items/",
   "wsdlPath": "wsdl/prod/",
   "endpoints": {
     "dataRecipient": "https://gs1tradesync-uat.pro-sharp.hu:5556/DataRecipientOperationsService.svc",
