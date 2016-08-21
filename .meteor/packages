@@ -24,3 +24,4 @@ zardak:soap
 infinitedg:winston
 wylio:winston-papertrail
 mdj:meteor-node-uuid
+peerlibrary:fs

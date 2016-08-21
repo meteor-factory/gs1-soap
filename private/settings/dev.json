@@ -1,5 +1,6 @@
 {
   "logItems": true,
+  "logItemsPath": "C:/Logs/gs1items/",
   "wsdlPath": "wsdl/local/",
   "endpoints": {
     "dataRecipient": "http://localhost:8000/dr",

@@ -53,10 +53,22 @@
       $value:
         responseStatusCode: responseCode
   logItem: (args) ->
-    if Meteor.settings.logItems
-      items = @getPropSafe args, ['catalogueItemNotificationType', 'CatalogueItemNotificationType']
-      for item in items
-        gtin = @getPropSafe item, ['catalogueItem', 'tradeItem', 'gtin']
-        json = JSON.stringify item, null, 2
-        logger.info "received product - #{gtin}\n#{json}"
+    try
+      ts = Date.now()
+      filename = Meteor.settings.logItemsPath + "item-#{ts}-request.json"
+      json = JSON.stringify args, null, 2
+      fs.writeFile filename, json
+
+      if Meteor.settings.logItems
+        items = @getPropSafe args, ['catalogueItemNotificationType', 'CatalogueItemNotificationType']
+        for item in items
+          gtin = @getPropSafe item, ['catalogueItem', 'tradeItem', 'gtin']
+          filename = Meteor.settings.logItemsPath + "item-#{ts}-gtin-#{gtin or 'UNKNOWN'}.json"
+          console.log filename
+
+          json = JSON.stringify item, null, 2
+          fs.writeFile filename, json
+  getLogPath: ->
+    path = Assets.absoluteFilePath 'logs/.logs'
+    path.substr 0, path.length - 5
 

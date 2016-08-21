@@ -1,5 +1,6 @@
 {
   "logItems": true,
+  "logItemsPath": "~/logs/gs1items/",
   "wsdlPath": "wsdl/stage/",
   "endpoints": {
     "dataRecipient": "https://ec2-52-58-65-75.eu-central-1.compute.amazonaws.com/DataRecepient.svc",
