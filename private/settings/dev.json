@@ -1,4 +1,5 @@
 {
+  "logItems": true,
   "wsdlPath": "wsdl/local/",
   "endpoints": {
     "dataRecipient": "http://localhost:8000/dr",

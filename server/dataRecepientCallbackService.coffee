@@ -19,6 +19,8 @@ service =
     wsHttpEndpoint:
       ReceiveCatalogueItemNotification: (args) ->
         logger.info 'ReceiveCatalogueItemNotification', {args}
+        GS1.logItem args
+
         #determine correct output
         @DRC.emit(args)
         response =

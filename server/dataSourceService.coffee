@@ -2,7 +2,7 @@
 @DS =
   updateProduct: (product) ->
 
-    gtin = GS1.getPropSafe product, 'catalogueItemNotificationType', 'CatalogueItemNotificationType', 'catalogueItem', 'tradeItem', 'gtin'
+    gtin = GS1.getPropSafe product, ['catalogueItemNotificationType', 'CatalogueItemNotificationType', 'catalogueItem', 'tradeItem', 'gtin']
 
     try
       client = getClient()

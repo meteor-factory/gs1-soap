@@ -17,7 +17,7 @@
     MODIFIED: "MODIFIED"
     NO_ACTION: "NO_ACTION"
     REJECTED: "REJECTED"
-  getPropSafe: (obj, props...) ->
+  getPropSafe: (obj, props) ->
     props.reduce ((o, prop) -> if o and o.hasOwnProperty prop then o[prop]), obj
   getHeader: (type, multiple = false) ->
     HeaderVersion: "1.0"
@@ -52,3 +52,11 @@
         xmlns: ""
       $value:
         responseStatusCode: responseCode
+  logItem: (args) ->
+    if Meteor.settings.logItems
+      items = @getPropSafe args, ['catalogueItemNotificationType', 'CatalogueItemNotificationType']
+      for item in items
+        gtin = @getPropSafe item, ['catalogueItem', 'tradeItem', 'gtin']
+        json = JSON.stringify item, null, 2
+        logger.info "received product - #{gtin}\n#{json}"
+
