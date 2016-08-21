@@ -38,7 +38,7 @@
       Type: type
       MulpleType: multiple
       CreationDateAndTime: new Date()
-  getResponse: (responseCode = @responseCode.ACCEPTED) ->
+  getResponse: (resp = @responseCode.ACCEPTED) ->
     receiver:
       attributes:
         xmlns: ""
@@ -51,7 +51,8 @@
       attributes:
         xmlns: ""
       $value:
-        responseStatusCode: responseCode
+        responseStatusCode:
+          $value: resp
   logItem: (args) ->
     try
       ts = Date.now()
