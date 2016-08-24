@@ -5,4 +5,9 @@ Meteor.methods({
   'echo': (msg) ->
     console.log 'echo', msg
     msg
+  'test': () ->
+    test()
 })
+
+test = () ->
+  1+1

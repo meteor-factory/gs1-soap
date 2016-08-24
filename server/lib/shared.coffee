@@ -1,17 +1,20 @@
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 
 @GS1 =
   endpoints:
     dataRecipient: Meteor.settings.endpoints.dataRecipient
     dataSource: Meteor.settings.endpoints.dataSource
   gln:
-    fooducer: 5790002328275
-    GS1: 5790000000029
+    fooducer: "5790002328275"
+    GS1: "5790000000029"
   messageTypes:
     catalogueItemNotification: "catalogueItemNotification"
     catalogueItemHierarchicalWithdrawal: "catalogueItemHierarchicalWithdrawal"
     catalogueItemConfirmation: "CatalogueItemConfirmation"
     catalogueItemSubscription: "CatalogueItemSubscription"
     requestForCatalogueItemNotification: "RequestForCatalogueItemNotification"
+  ns:
+    stan: "http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader"
   responseCodes:
     ACCEPTED: "ACCEPTED"
     MODIFIED: "MODIFIED"
@@ -20,24 +23,33 @@
   getPropSafe: (obj, props) ->
     props.reduce ((o, prop) -> if o and o.hasOwnProperty prop then o[prop]), obj
   getHeader: (type, multiple = false) ->
-    HeaderVersion: "1.0"
+    HeaderVersion:
+      attributes:
+        xmlns: @ns.stan
+      $value: "1.0"
     Sender:
+      attributes:
+        xmlns: @ns.stan
       Identifier:
         attributes:
           Authority: "GS1"
         $value: @gln.fooducer
     Receiver:
+      attributes:
+        xmlns: @ns.stan
       Identifier:
         attributes:
           Authority: "GS1"
         $value: @gln.GS1
     DocumentIdentification:
+      attributes:
+        xmlns: @ns.stan
       Standard: "GS1"
       TypeVersion: "3.1"
       InstanceIdentifier: "Fooducer¤Message¤" + uuid.v4()
       Type: type
-      MulpleType: multiple
-      CreationDateAndTime: new Date()
+      MultipleType: multiple
+      CreationDateAndTime: "2016-06-15T07:53:31.174Z" #(new Date().toISOString())
   getResponse: (resp = @responseCode.ACCEPTED) ->
     receiver:
       attributes:

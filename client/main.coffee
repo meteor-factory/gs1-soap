@@ -6,6 +6,8 @@ Template.hello.helpers
     Template.instance().counter.get()
 
 Template.hello.events
+  'click button.test': () ->
+    Meteor.call 'test'
   'click button.click': (event, instance) ->
     instance.counter.set instance.counter.get() + 1
   'submit form.echo': (event, instance) ->

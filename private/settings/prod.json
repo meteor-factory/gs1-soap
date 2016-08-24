@@ -3,7 +3,7 @@
   "logItemsPath": "/home/fooducer/logs/gs1items/",
   "wsdlPath": "wsdl/prod/",
   "endpoints": {
-    "dataRecipient": "https://gs1tradesync-uat.pro-sharp.hu:5556/DataRecipientOperationsService.svc",
-    "dataSource": "https://gs1tradesync-uat.pro-sharp.hu:5556/DataSourceOperationsService.svc"
+    "dataRecipient": "https://ec2-52-58-65-75.eu-central-1.compute.amazonaws.com/prod/DataRecepient.svc",
+    "dataSource": "https://ec2-52-58-65-75.eu-central-1.compute.amazonaws.com/prod/DataSource.svc"
   }
 }

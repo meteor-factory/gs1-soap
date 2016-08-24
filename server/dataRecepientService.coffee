@@ -1,18 +1,39 @@
 
 @DR =
-  addSubscription: (gln, gtin) ->
+  addSubscription: (gln) ->
     try
       client = getClient()
+      console.log "client created"
       request =
         catalogueItemSubscriptionType:
-          creationDateTime: new Date()
-          dataRecipient: GS1.gln.fooducer
-          dataSource: gln
-          gtin: gtin
+          creationDateTime:
+            attributes:
+              xmlns: ""
+            $value: new Date().toISOString()
+          documentStatusCode:
+            attributes:
+              xmlns: ""
+            $value: "ORIGINAL"
+          catalogueItemSubscriptionIdentification:
+            attributes:
+              xmlns: ""
+            entityIdentification: "CatalogueItemSubscription-" + uuid.v4()
+            contentOwner:
+              gln: gln
+          dataRecipient:
+            attributes:
+              xmlns: ""
+            $value: GS1.gln.GS1
+          dataSource:
+            attributes:
+              xmlns: ""
+            $value: GS1.gln.fooducer
           targetMarket:
-            targetMarketCountryCode: 208
-        standardBusinessDocumentHeader: GS1.getHeader GS1.messageTypes.catalogItemSubscription
-
+            attributes:
+              xmlns: ""
+            targetMarketCountryCode: "208"
+        standardBusinessDocumentHeader: GS1.getHeader GS1.messageTypes.catalogueItemSubscription
+      console.log "req", request
       result = client.AddSubscription request
       logger.log 'added subscription', {result}
       return result

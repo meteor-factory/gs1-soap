@@ -1,0 +1,9 @@
+{
+  "logItems": true,
+  "logItemsPath": "C:/Logs/gs1items/",
+  "wsdlPath": "wsdl/local/",
+  "endpoints": {
+    "dataRecipient": "http://ec2-52-58-65-75.eu-central-1.compute.amazonaws.com/test/DataRecepient.svc",
+    "dataSource": "http://ec2-52-58-65-75.eu-central-1.compute.amazonaws.com/test/DataSource.svc"
+  }
+}

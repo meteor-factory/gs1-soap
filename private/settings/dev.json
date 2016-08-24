@@ -3,7 +3,7 @@
   "logItemsPath": "C:/Logs/gs1items/",
   "wsdlPath": "wsdl/local/",
   "endpoints": {
-    "dataRecipient": "http://localhost:8000/dr",
-    "dataSource": "http://localhost:8000/ds"
+    "dataRecipient": "http://localhost/GS1.Proxy/DataRecepient.svc",
+    "dataSource": "http://localhost/GS1.Proxy/DataSource.svc"
   }
 }

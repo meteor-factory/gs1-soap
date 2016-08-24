@@ -3,7 +3,7 @@
   "logItemsPath": "/home/david/logs/gs1items/",
   "wsdlPath": "wsdl/stage/",
   "endpoints": {
-    "dataRecipient": "https://ec2-52-58-65-75.eu-central-1.compute.amazonaws.com/DataRecepient.svc",
-    "dataSource": "https://ec2-52-58-65-75.eu-central-1.compute.amazonaws.com/DataSource.svc"
+    "dataRecipient": "https://ec2-52-58-65-75.eu-central-1.compute.amazonaws.com/stage/DataRecepient.svc",
+    "dataSource": "https://ec2-52-58-65-75.eu-central-1.compute.amazonaws.com/stage/DataSource.svc"
   }
 }
