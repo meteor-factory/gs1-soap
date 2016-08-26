@@ -1,6 +1,8 @@
 @API = 
   addSubscription: (gln) ->
     DR.addSubscription gln
+  requestResendProducts: (gln) ->
+    DR.requestResendProducts(gln)
   addSubscription: (gln, gtin) ->
     DR.addSubscription gln, gtin
   updateProduct: (product) ->
