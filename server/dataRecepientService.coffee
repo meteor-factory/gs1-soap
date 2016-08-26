@@ -19,15 +19,15 @@
               xmlns: ""
             entityIdentification: "CatalogueItemSubscription-" + uuid.v4()
             contentOwner:
-              gln: gln
+              gln: GS1.gln.fooducer
           dataRecipient:
             attributes:
               xmlns: ""
-            $value: GS1.gln.GS1
+            $value: GS1.gln.fooducer
           dataSource:
             attributes:
               xmlns: ""
-            $value: GS1.gln.fooducer
+            $value: gln
           targetMarket:
             attributes:
               xmlns: ""
