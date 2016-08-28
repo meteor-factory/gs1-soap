@@ -103,4 +103,5 @@ client = null;
 getClient = () ->
   if client is null
     client = Soap.createClient GS1.endpoints.dataRecipient + "?wsdl"
+  client.setEndpoint GS1.endpoints.dataRecipient
   client

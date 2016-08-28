@@ -10,4 +10,6 @@ Meteor.methods({
 })
 
 test = () ->
-  1+1
+  1 + 1
+  #API.addSubscription(5790000016020)
+  #API.requestResendProducts(5790000016020)
