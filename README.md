@@ -1,3 +1,3 @@
 # gs1-soap
 
-[INACTIVE] gs1-soap
+sample implementation of communication with GS1 <-> Fooducer proxy
