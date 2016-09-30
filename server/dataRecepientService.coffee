@@ -35,7 +35,7 @@
         standardBusinessDocumentHeader: GS1.getHeader GS1.messageTypes.catalogueItemSubscription
       console.log "req", request
       result = client.AddSubscription request
-      logger.log 'added subscription', {result}
+      logger.info 'added subscription', {result}
       return result
     catch err
       logger.error 'add subscription failed', {gln, gtin, err}
@@ -88,7 +88,7 @@
         standardBusinessDocumentHeader: GS1.getHeader GS1.messageTypes.catalogueItemSubscription
       console.log "req", request
       result = client.AddRequestForCatalogueItemNotification request
-      logger.log 'request resend products', {result}
+      logger.info 'request resend products', {result}
       return result
     catch err
       logger.error 'add subscription failed', {gln, gtin, err}
@@ -103,5 +103,4 @@ client = null;
 getClient = () ->
   if client is null
     client = Soap.createClient GS1.endpoints.dataRecipient + "?wsdl"
-  client.setEndpoint GS1.endpoints.dataRecipient
   client

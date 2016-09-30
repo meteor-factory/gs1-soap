@@ -5,6 +5,7 @@
 <body>
   <h1>GS1 playground</h1>
   {{> hello}}
+  {{> gs1}}
 </body>
 
 <template name="hello">
@@ -19,4 +20,34 @@
         </form>
         <button class="test">Test</button>
     </section>
+</template>
+
+<template name="gs1">
+  <section class="bordered">
+    <h2>GS1 data recepient</h2>
+    <form class="add">
+      <input type="text" name="gln" value="5790000016020" />
+      <button type="submit">Add subscription</button><br />
+      <textarea name="output" readonly rows="20" cols="180"></textarea>
+    </form>
+    <form class="resend">
+      <input type="text" name="gln" value="5790000016020" />
+      <button type="submit">Resend products</button><br />
+      <textarea name="output" readonly rows="20" cols="180"></textarea>
+    </form>
+  </section>
+  <section class="bordered">
+    <h2>GS1 data source</h2>
+    <form class="send">
+      <textarea name="input" rows="20" cols="180"></textarea>
+      <br />
+      <button type="submit">Send product</button>
+      <br />
+      <textarea name="output" readonly rows="20" cols="180"></textarea>
+    </form>
+    <ul>
+      <li>5790000016020</li>
+      <li>5716161000005</li>
+    </ul>
+  </section>
 </template>

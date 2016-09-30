@@ -7,9 +7,19 @@ Meteor.methods({
     msg
   'test': () ->
     test()
+  'add': (gln) ->
+    API.addSubscription(gln)
+  'resend': (gln) ->
+    API.requestResendProducts(gln)
+  'send': (json) ->
+    console.log("json", json)
+    pojo = JSON.parse(json)
+    console.log("pojo", pojo)
+    API.updateProduct(pojo)
 })
 
 test = () ->
   1 + 1
   #API.addSubscription(5790000016020)
-  #API.requestResendProducts(5790000016020)
+  API.requestResendProducts(5790000016020)
+  #API.requestResendProducts(5716161000005)

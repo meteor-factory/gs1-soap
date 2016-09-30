@@ -17,3 +17,20 @@ Template.hello.events
       val = parseInt event.target.input.value
       if val >= 0
         event.target.input.value = val + 1
+
+Template.gs1.events
+  'submit form.add': (event) ->
+    console.log("add")
+    event.preventDefault()
+    Meteor.call 'add', event.target.gln.value, (error, result) ->
+      event.target.output.value = error || JSON.stringify result, null, 2
+  'submit form.resend': (event) ->
+    console.log("resend")
+    event.preventDefault()
+    Meteor.call 'resend', event.target.gln.value, (error, result) ->
+      event.target.output.value = error || JSON.stringify result, null, 2
+  'submit form.send': (event) ->
+    console.log("send")
+    event.preventDefault()
+    Meteor.call 'send', event.target.input.value, (error, result) ->
+      event.target.output.value = error || JSON.stringify result, null, 2

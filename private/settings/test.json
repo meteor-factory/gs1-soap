@@ -3,7 +3,7 @@
   "logItemsPath": "C:/Logs/gs1items/",
   "wsdlPath": "wsdl/local/",
   "endpoints": {
-    "dataRecipient": "http://gs1proxy.fooducer.com/DataRecepient.svc",
-    "dataSource": "http://gs1proxy.fooducer.com/DataSource.svc"
+    "dataRecipient": "http://gs1proxy.fooducer.com/stage/DataRecepient.svc",
+    "dataSource": "http://gs1proxy.fooducer.com/stage/DataSource.svc"
   }
 }

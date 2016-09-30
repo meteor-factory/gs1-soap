@@ -7,6 +7,7 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
   gln:
     fooducer: "5790002328275"
     GS1: "5790000000029"
+    GS1PROD: "5790000500000"
   messageTypes:
     catalogueItemNotification: "catalogueItemNotification"
     catalogueItemHierarchicalWithdrawal: "catalogueItemHierarchicalWithdrawal"
