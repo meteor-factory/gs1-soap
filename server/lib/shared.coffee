@@ -47,7 +47,7 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
         xmlns: @ns.stan
       Standard: "GS1"
       TypeVersion: "3.1"
-      InstanceIdentifier: "Fooducer¤Message¤" + uuid.v4()
+      InstanceIdentifier: "Fooducer-Message-" + uuid.v4()
       Type: type
       MultipleType: multiple
       CreationDateAndTime: "2016-06-15T07:53:31.174Z" #(new Date().toISOString())

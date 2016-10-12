@@ -2,9 +2,6 @@
 
 @DS =
   updateProduct: (product) ->
-
-    gtin = GS1.getPropSafe product, ['catalogueItemNotificationType', 'CatalogueItemNotificationType', 'catalogueItem', 'tradeItem', 'gtin']
-
     try
       client = getClient()
         
@@ -12,13 +9,36 @@
         for key in Object.keys item
           value = item[key]
           if typeof(value) is "object"
+            if value is null
+              value =
+                $value: null
             value.attributes = { xmlns: "" }
           else
             item[key] =
               attributes: {xmlns: ""}
               $value: value
 
+      fixExtensionsNs = (extensions) ->
+        for key of extensions
+          value = extensions[key]
+          console.log key, value
+          xmlns = value.attributes["xsi:schemaLocation"].split(" ")[0]
+          value.attributes.xmlns = xmlns
+          setNs value
+
+      traverseForExtensions = (obj) ->
+        for key of obj
+          value = obj[key]
+          if key is "extension"
+            fixExtensionsNs value
+          if typeof(value) is "object" and value isnt null
+            console.log "test", traverseForExtensions
+            traverseForExtensions value
+
+
       product.catalogueItemNotificationType.CatalogueItemNotificationType.map setNs
+      traverseForExtensions product
+
       request =
         catalogueItemNotification: product.catalogueItemNotificationType
         standardBusinessDocumentHeader: GS1.getHeader GS1.messageTypes.catalogueItemNotification
@@ -28,7 +48,7 @@
       return result
     catch err
       console.log 'error', err
-      logger.error 'add subscription failed', {gln, gtin, err}
+      logger.error 'sending product failed', {err}
       if err.error is 'soap-creation'
         console.log 'SOAP client creation failed', err
       else if err.error is 'soap-method'

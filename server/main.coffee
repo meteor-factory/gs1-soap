@@ -12,9 +12,7 @@ Meteor.methods({
   'resend': (gln) ->
     API.requestResendProducts(gln)
   'send': (json) ->
-    console.log("json", json)
     pojo = JSON.parse(json)
-    console.log("pojo", pojo)
     API.updateProduct(pojo)
 })
 
