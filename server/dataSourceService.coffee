@@ -13,18 +13,24 @@
               value =
                 $value: null
             if key isnt "attributes"
-              value.attributes = { xmlns: "" }
+              if value.attributes
+                value.attributes.xmlns = ""
+              else
+                value.attributes = { xmlns: "" }
           else
-            item[key] =
-              attributes: {xmlns: ""}
-              $value: value
+            if item[key].attributes
+              item[key].attributes.xmlns = ""
+            else
+              item[key] =
+                attributes: {xmlns: ""}
+                $value: value
 
       fixExtensionsNs = (extensions) ->
         for key of extensions
           value = extensions[key]
           console.log key, value
           xmlns = value.attributes["xsi:schemaLocation"].split(" ")[0]
-          value.attributes.xmlns = xmlns
+          extensions[key].attributes.xmlns = xmlns
           setNs value
 
       traverseForExtensions = (obj) ->

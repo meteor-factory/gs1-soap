@@ -50,7 +50,7 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
       InstanceIdentifier: "Fooducer-Message-" + uuid.v4()
       Type: type
       MultipleType: multiple
-      CreationDateAndTime: "2016-06-15T07:53:31.174Z" #(new Date().toISOString())
+      CreationDateAndTime: new Date().toISOString()
   getResponse: (resp = @responseCode.ACCEPTED) ->
     receiver:
       attributes:
