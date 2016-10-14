@@ -4,7 +4,7 @@
   updateProduct: (product) ->
     try
       client = getClient()
-        
+
       setNs = (item) ->
         for key in Object.keys item
           value = item[key]
@@ -12,7 +12,8 @@
             if value is null
               value =
                 $value: null
-            value.attributes = { xmlns: "" }
+            if key isnt "attributes"
+              value.attributes = { xmlns: "" }
           else
             item[key] =
               attributes: {xmlns: ""}
@@ -32,7 +33,6 @@
           if key is "extension"
             fixExtensionsNs value
           if typeof(value) is "object" and value isnt null
-            console.log "test", traverseForExtensions
             traverseForExtensions value
 
 
